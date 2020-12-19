@@ -39,7 +39,7 @@ if (isset($_POST['newemail'], $_POST['username'])) {
     To change email, you need to provide the old email, new email and your password
 </h2>
 
-<form action="my-profile.php" method="POST">
+<form action="change-email.php" method="POST">
 
     <label for="newemail"></label>
     <input type="text" name="newemail" id="newemail">

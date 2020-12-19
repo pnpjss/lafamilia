@@ -1,0 +1,8 @@
+Redirect function
+Move form destinations and functions to another folder 
+
+Consider style 
+Could login be a dropdown function?
+
+Database
+Add image upload for avatar column in users table 
