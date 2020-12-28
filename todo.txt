@@ -1,3 +1,6 @@
+https://github.com/yrgo/wu20/tree/main/PHP/29%20-%20Hacker%20News
+
+
 Redirect function
 Move form destinations and functions to another folder 
 
@@ -6,3 +9,11 @@ Could login be a dropdown function?
 
 Database
 Add image upload for avatar column in users table 
+
+Read about session. When am i still logged in and how do i know?'
+
+När ska man använda redirect, när ska man använda javascript för att byta location
+
+avatar 
+https://github.com/yrgo/wu20/tree/main/PHP/20%20-%20Uploading%20Files
+check max file size in php.ini 

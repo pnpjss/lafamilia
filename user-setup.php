@@ -1,21 +1,30 @@
 <?php
 // funkar
 declare(strict_types=1);
-session_start();
-require __DIR__ . ('/header.php');
-$pdo = new PDO('sqlite:lafamilia.sqlite');
+require __DIR__ . ('/app/autoload.php');
+require __DIR__ . ('/app/views/header.php');
 
-if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['lastname'], $_POST['passwd'])) {
+
+if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['lastname'], $_POST['pwd'], $_POST['pwdconfirm'])) {
 
 
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
     $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
-    $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_EMAIL);
-    $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_EMAIL);
-    $pw = filter_var($_POST['passwd'], FILTER_SANITIZE_EMAIL);
+    $firstname = filter_var($_POST['firstname'], FILTER_SANITIZE_STRING);
+    $lastname = filter_var($_POST['lastname'], FILTER_SANITIZE_STRING);
+    $pw = filter_var($_POST['pwd'], FILTER_SANITIZE_STRING);
+    $pwdconfirm = filter_var($_POST['pwdconfirm'], FILTER_SANITIZE_STRING);
     $pw = password_hash($pw, PASSWORD_DEFAULT);
+    $pwdconfirm = password_hash($pwdconfirm, PASSWORD_DEFAULT);
 
-    $query = "INSERT INTO users (username, email, firstname, lastname, passwd) VALUES (:username, :email, :firstname, :lastname, :passwd)";
+    if ($pw !== $pwconfirm) {
+        echo "Password incorrect";
+        // redirect('/user-setup.php');
+    }
+
+
+
+    $query = "INSERT INTO users (username, email, firstname, lastname, passwd) VALUES (:username, :email, :firstname, :lastname, :pwd)";
     $statement = $pdo->prepare($query);
 
     if (!$statement) {
@@ -26,7 +35,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['last
     $statement->bindParam(':email', $email, PDO::PARAM_STR);
     $statement->bindParam(':firstname', $firstname, PDO::PARAM_STR);
     $statement->bindParam(':lastname', $lastname, PDO::PARAM_STR);
-    $statement->bindParam(':passwd', $pw, PDO::PARAM_STR);
+    $statement->bindParam(':pwd', $pw, PDO::PARAM_STR);
     $statement->execute();
 }
 
@@ -51,10 +60,10 @@ foreach ($users as $user) {
 <form action="user-setup.php" method="post">
 
     <label for="username">username</label>
-    <input type="text" name="username" id="username">
+    <input type="text" name="username" id="username" required>
 
     <label for="email">email</label>
-    <input type="text" name="email" id="email">
+    <input type="text" name="email" id="email" required>
 
     <label for="firstname">firstname</label>
     <input type="text" name="firstname" id="firstname">
@@ -62,14 +71,15 @@ foreach ($users as $user) {
     <label for="lastname">firstname</label>
     <input type="text" name="lastname" id="lastname">
 
-    <label for="passwd">password</label>
-    <input type="password" name="passwd" id="passwd">
+    <label for="pwd">password</label>
+    <input type="password" name="pwd" id="pwd" required>
+
+    <label for="pwdconfirm">password</label>
+    <input type="password" name="pwdconfirm" id="pwdconfirm" required>
 
     <button type="submit">save</button>
 
 </form>
 
 
-</body>
-
-</html>
+<?php require __DIR__ . ('/app/views/footer.php');

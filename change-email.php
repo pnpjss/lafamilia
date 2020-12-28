@@ -1,6 +1,7 @@
 <?php
 // lös autoload och session
 // fetcha session info? hur?
+
 $pdo = new PDO('sqlite:lafamilia.sqlite');
 
 
@@ -13,7 +14,7 @@ if (isset($_POST['newemail'], $_POST['username'])) {
 
 
 
-    $query = "UPDATE users SET email = :email WHERE username LIKE 'BBB'";
+    $query = "UPDATE users SET email = :email WHERE username = :username";
 
     $statement = $pdo->prepare($query);
 
@@ -22,10 +23,8 @@ if (isset($_POST['newemail'], $_POST['username'])) {
     }
 
     $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
-    // $statement->bindParam(':username', $username, PDO::PARAM_STR);
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
     $statement->execute();
-
-    // $user = $statement->fetch(PDO::FETCH_ASSOC);
 }
 
 

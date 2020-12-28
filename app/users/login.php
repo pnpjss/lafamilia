@@ -1,11 +1,11 @@
 <?php
 //login fungerar
-require __DIR__ . ('/header.php');
+require __DIR__ . ('/../autoload.php');
+require __DIR__ . ('/../views/header.php');
 // require __DIR__ . ('/nav.php');
 
-require __DIR__ . ('/autoload.php');
 
-if (isset($_POST['username'], $_POST['passwd'])) {
+if (isset($_POST['username'], $_POST['pwd'])) {
     $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
 
 
@@ -15,15 +15,16 @@ if (isset($_POST['username'], $_POST['passwd'])) {
 
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
+
+
     if (!$user) {
         echo 'bad login';
     }
-    if (password_verify($_POST['passwd'], $user['passwd'])) {
+    if (password_verify($_POST['pwd'], $user['passwd'])) {
 
-        unset($user['passwd']);
+        unset($user['pwd']);
         $_SESSION['user'] = $user;
-
-        require __DIR__ . ('/my-profile.php');
+        redirect('/../../index.php');
     } else {
         echo 'bad login';
     }
@@ -33,10 +34,12 @@ if (isset($_POST['username'], $_POST['passwd'])) {
 
 <p>Welcomers</p>
 <br>
-<form action="index.php" method="POST">
+<form action="login.php" method="POST">
     <label for="username">username</label>
     <input type="text" name="username" id="username">
-    <label for="passwd">password</label>
-    <input type="text" name="passwd" id="passwd">
+    <label for="pwd">password</label>
+    <input type="text" name="pwd" id="pwd">
     <button type="submit">Login</button>
 </form>
+
+<a href="/../../user-setup.php">Create user</a>
