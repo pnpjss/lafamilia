@@ -1,6 +1,6 @@
 <?php
 // funkar
-declare(strict_types=1);
+// Fixa datum?!
 require __DIR__ . ('/app/autoload.php');
 require __DIR__ . ('/app/views/header.php');
 
@@ -19,7 +19,7 @@ if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['last
 
     if ($pw !== $pwconfirm) {
         echo "Password incorrect";
-        // redirect('/user-setup.php');
+        $error = $_SESSION['error'];
     }
 
 

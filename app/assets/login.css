@@ -1,0 +1,68 @@
+.login-grid-container{
+    color: white;
+    display: grid;
+    height: 65%;
+    width: 70%;
+    grid-template-columns: 50%;
+    grid-template-rows:repeat(6, 4.5rem);
+    /* grid-template-rows:1fr, 2fr, 1fr,2fr, 1fr; */
+    justify-content: center;
+    align-items: center;
+    background: #141E30;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    border-radius: 1%;
+    margin-top: 10%;
+}
+.login-grid-container > *
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item1 {
+    padding-top: 1rem;
+}
+input {
+    border-style: none;
+    border-bottom: 2px solid rgb(13, 0, 54);
+    height: 2rem;
+    background-color: rgba(0, 0, 255, 0);
+    color: white;
+    text-align: center;
+}
+::-webkit-input-placeholder {
+    text-align: center;
+}
+ 
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;  
+}
+ 
+::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;  
+}
+ 
+:-ms-input-placeholder {  
+    text-align: center; 
+}
+input:focus::placeholder {
+    color: transparent;
+  }
+
+input:focus {
+background-color: rgba(0, 0, 255, 0);
+outline: none;
+ }
+
+.loginbtn {
+border:2px solid rgb(13, 0, 54);
+height :2rem;
+width: 5rem;
+background-color: rgba(0, 0, 255, 0);
+color: white;
+}
+
+.loginbtn:focus{outline:none}
+

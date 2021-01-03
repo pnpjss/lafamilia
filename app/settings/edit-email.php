@@ -1,6 +1,8 @@
 <?php
 
-require __DIR__ . ('/app/autoload.php');
+require __DIR__ . ('/../autoload.php');
+require __DIR__ . ('/../views/header.php');
+require __DIR__ . ('/../views/nav.php');
 
 
 
@@ -39,13 +41,13 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
 
 
 ?>
-
+<main><section>
 
 <h2>
     Change email
 </h2>
 
-<form action="change-email.php" method="POST">
+<form action="edit-email.php" method="POST">
 
     <label for="newemail">Current Email</label>
     <input type="text" name="newemail" id="newemail" placeholder="Curre email">
@@ -55,3 +57,4 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
     <button type="submit">submit changes</button>
 
 </form>
+</section></main>

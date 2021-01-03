@@ -13,19 +13,15 @@ mb_internal_encoding('UTF-8');
 
 
 
-require __DIR__ . '/functions.php';
+require __DIR__ . ('/functions.php');
 
 // Fetch the global configuration array.
 $config = require __DIR__ . '/config.php';
 
 // Setup the database connection.
 $pdo = new PDO($config['database_path']);
-// $pdo = new PDO('sqlite:database/lafamilia.sqlite');
+// // $pdo = new PDO('sqlite:database/lafamilia.sqlite');
 
 
 // this one is supposed to be in functions.php ??
-function redirect(string $path)
-{
-    header("Location: ${path}");
-    exit;
-}
+

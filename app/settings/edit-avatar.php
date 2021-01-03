@@ -1,8 +1,10 @@
 <?php
 
-declare(strict_types=1);
+require __DIR__ . ('/../autoload.php');
+require __DIR__ . ('/../views/header.php');
+require __DIR__ . ('/../views/nav.php');
 
-require __DIR__ . ('/app/autoload.php');
+
 
 $avatar = $_SESSION['user']['avatar'];
 
@@ -20,7 +22,7 @@ if (isset($_FILES['avatar'])) {
 
     if ($imageActualExt === 'png' && $imageSize < 1000000) {
         $imageNewName = uniqid('', true) . "." . $imageActualExt;
-        $imageDestination = 'app/images/' . $imageNewName;
+        $imageDestination = '../images/' . $imageNewName;
         move_uploaded_file($imageTempName, $imageDestination);
 
         $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
@@ -44,8 +46,8 @@ if (isset($_FILES['avatar'])) {
 
 ?>
 
-
-<form action="change-avatar.php" method="post" enctype="multipart/form-data">
+<main><section>
+<form action="edit-avatar.php" method="post" enctype="multipart/form-data">
                 <label for="avatar">Png file required</label>
                 <input type="file" name="avatar" id="avatar" required>
                 <button type="submit">Upload</button>
@@ -55,4 +57,5 @@ if (isset($_FILES['avatar'])) {
 
             <br><br>
 
-            <img src="<?php echo "/app/images/$avatar" ?>" alt="">
+            <img src="<?php echo "/app/images/$avatar" ?>" height="90px" width="90px" alt="">
+            </section></main>

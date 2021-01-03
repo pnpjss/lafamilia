@@ -1,0 +1,21 @@
+.settings-grid{
+    display: grid;
+    height: 100%;
+    width: 100%;
+    padding:2rem;
+    grid-template-columns: 25% 75%;
+    grid-template-rows:repeat(4, 25%) ;
+    border:1px solid coral;
+    font-size: 12px;
+    grid-column-gap: 0.5rem;
+}
+.grid-item3{
+    color :white;
+}
+#bio{
+    max-width: 90%;
+    max-height: 100px;
+}
+.grid-item5, .grid-item6{
+    max-height: fit-content;
+}

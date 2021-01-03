@@ -1,0 +1,71 @@
+
+@font-face {
+    font-family: "Teko-Regular";
+    src: url("../fonts/Teko-Regular.woff") format("woff"), 
+      url("../fonts/Teko-Regular.woff2") format("woff2"); 
+    font-weight: normal;
+    font-style: normal;
+  }
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: Teko-Regular;
+    font-size: 18px;
+}
+
+body{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #131313;
+    color: white;
+    width:100%;
+    height: 50px;
+    flex-wrap: nowrap;
+    position: fixed;
+}
+nav .img{
+    margin-right: 0;
+}
+ul{
+    display: flex;
+    justify-content:space-between ;
+    align-items: center;
+    width: 90%;
+    list-style: none;
+    position: absolute;
+}
+li{
+    display: inline-block;
+    cursor: pointer;
+}
+a:visited{
+    color :rgb(124, 124, 158);
+}
+
+main{
+display: flex;
+height: 100%;
+width: 100%;
+background-color: #4e463a;
+}
+section {
+    display: flex;
+    justify-content: center;
+    width: 100% ;
+    height:100vh - 50px; /* minus pga navbar*/
+    background: #2c3e50;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to bottom, #c4c9cc, #a6b4c2);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to bottom, #abcce2, #9199a1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    margin-top: 50px;
+    }
+    

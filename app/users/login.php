@@ -2,7 +2,7 @@
 //login fungerar
 require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
-// require __DIR__ . ('/nav.php');
+require __DIR__ . ('/../views/nav.php');
 
 
 if (isset($_POST['username'], $_POST['pwd'])) {
@@ -22,24 +22,14 @@ if (isset($_POST['username'], $_POST['pwd'])) {
     }
     if (password_verify($_POST['pwd'], $user['passwd'])) {
 
-        unset($user['pwd']);
+        unset($user['passwd']);
         $_SESSION['user'] = $user;
         redirect('/../../index.php');
     } else {
-        echo 'bad login';
+
+        //fixa
+       $_SESSION['error'] = "bad login";
+       redirect('/../../login.php');
     }
 }
 
-?>
-
-<p>Welcomers</p>
-<br>
-<form action="login.php" method="POST">
-    <label for="username">username</label>
-    <input type="text" name="username" id="username">
-    <label for="pwd">password</label>
-    <input type="text" name="pwd" id="pwd">
-    <button type="submit">Login</button>
-</form>
-
-<a href="/../../user-setup.php">Create user</a>

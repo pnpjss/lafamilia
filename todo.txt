@@ -17,3 +17,12 @@ När ska man använda redirect, när ska man använda javascript för att byta l
 avatar 
 https://github.com/yrgo/wu20/tree/main/PHP/20%20-%20Uploading%20Files
 check max file size in php.ini 
+
+
+Hur ska nav se ut? vill jag investera massa tid i knappar, borde jag börja med det?
+ska jag investera min tid att 
+
+ska man ha en bio?
+
+¨
+gör en funktion som gör att man får sin profil fetchad efter varje ny förändring, samma med forumet sen

@@ -1,7 +1,8 @@
 <?php
 
-require __DIR__ . ('/app/autoload.php');
-require __DIR__ . ('/app/views/nav.php');
+require __DIR__ . ('/../autoload.php');
+require __DIR__ . ('/../views/header.php');
+require __DIR__ . ('/../views/nav.php');
 
 
 
@@ -30,7 +31,7 @@ if (isset($_POST['oldpwd'], $_POST['newpwd'], $_POST['confirmpwd'])) {
         
         
     } else {
-        echo 'bad login';
+        $message = 'Bad password';
     }
   
 
@@ -50,7 +51,7 @@ if (isset($_POST['oldpwd'], $_POST['newpwd'], $_POST['confirmpwd'])) {
     <section>
 
 
-        <form class="changepassword" action="change-password.php" method="POST">
+        <form class="changepassword" action="edit-password.php" method="POST">
             <label for="oldpwd">Old password</label>
             <input type="password" name="oldpwd" id="oldpwd"> 
             <br>
