@@ -1,15 +1,13 @@
 <?php //Abow css fuck that 
 
 
-
-
 $avatarImage = $_SESSION['user']['avatar'];
 
 ?>
 
 <nav>
-    <ul> 
-        
+    <ul>
+
 
         <li><a href="/../../index.php"> la familia</a></li>
         <!-- <li><a href="/../../index.php">New</a></li> -->
@@ -33,15 +31,13 @@ $avatarImage = $_SESSION['user']['avatar'];
             <li><a href="/../../settings.php"><?php echo $_SESSION['user']['username'] ?></a></li>
         <?php endif; ?>
 
-        <!-- <?php if (isset($_SESSION['user'])) : ?>
-            <li><img src="<?php echo "app/images/$avatarImage" ?>" width="40px" height="40px" alt=""></li>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <li><img src="<?php echo "app/images/$avatarImage" ?>" width="50px" height="50px" alt=""></li>
         <?php endif; ?>
-        detta är en ide men ???
-        -->
+
+
+
 
     </ul>
 
-
 </nav>
-
-<?php require __DIR__ . ('/footer.php'); ?>

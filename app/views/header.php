@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/app/assets/style.css"> 
     <link rel="stylesheet" href="/app/assets/login.css"> 
     <link rel="stylesheet" href="/app/assets/settings.css"> 
+    <link rel="stylesheet" href="/app/assets/index.css"> 
     <title>Document</title>
 </head>
 

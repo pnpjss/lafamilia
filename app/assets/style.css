@@ -10,7 +10,7 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family: Teko-Regular;
+    font-family: Teko-regular;
     font-size: 18px;
 }
 
@@ -33,7 +33,7 @@ nav{
     position: fixed;
 }
 nav .img{
-    margin-right: 0;
+    margin-left: 0;
 }
 ul{
     display: flex;
