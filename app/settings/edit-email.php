@@ -22,7 +22,6 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
         $statement = $pdo->prepare($query);
         $statement->bindParam(':email', $inputnew, PDO::PARAM_STR);
         $statement->execute();
-    
     }
 
 
@@ -41,20 +40,22 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
 
 
 ?>
-<main><section>
+<main>
+    <section>
 
-<h2>
-    Change email
-</h2>
+        <h2>
+            Change email
+        </h2>
 
-<form action="edit-email.php" method="POST">
+        <form action="edit-email.php" method="POST">
 
-    <label for="newemail">Current Email</label>
-    <input type="text" name="newemail" id="newemail" placeholder="Curre email">
-    <label for="newemail">New Email</label>
-    <input type="text" name="newemail" id="newemail" placeholder="New email">
+            <label for="newemail">Current Email</label>
+            <input type="text" name="newemail" id="newemail" placeholder="Curre email">
+            <label for="newemail">New Email</label>
+            <input type="text" name="newemail" id="newemail" placeholder="New email">
 
-    <button type="submit">submit changes</button>
+            <button type="submit">submit changes</button>
 
-</form>
-</section></main>
+        </form>
+    </section>
+</main>

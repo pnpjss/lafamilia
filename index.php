@@ -1,5 +1,7 @@
 <?php
 //login fungerar
+
+
 require __DIR__ . ('/app/views/header.php');
 
 require __DIR__ . ('/app/autoload.php');
@@ -34,7 +36,7 @@ $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
                 <div class="post-item2">
                     <b> <?php echo $post['title']; ?> </b><br>
                     <a href="<?php echo $post['url']; ?>"><?php echo $post['url']; ?></a>
-                    <div><a href="comments.php?id=<?= $post['id'] ?>">comment</a></div>
+                    <div><a href="comments.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a></div>
                 </div>
 
 

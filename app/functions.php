@@ -63,6 +63,23 @@ function fetchPost($pdo, $postId)
     $statement = $pdo->query('SELECT * FROM posts WHERE id = :id');
     $statement->BindParam(':id', $postId, PDO::PARAM_INT);
     $statement->execute();
-    $post = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $post = $statement->fetch(PDO::FETCH_ASSOC);
     return $post;
+}
+
+function fetchComments($pdo, $postId)
+{
+    $statement = $pdo->prepare("SELECT * FROM comments WHERE post_id = :postId ORDER BY Comments.post_id DESC");
+    $statement->BindParam(':postId', $postId, PDO::PARAM_INT);
+    $statement->execute();
+    $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $userComments;
+}
+function fetchPostedBy($pdo, $commentUserId)
+{
+    $statement = $pdo->prepare("SELECT username from users where id = :commentUserId");
+    $statement->BindParam(':id', $commentUserId, PDO::PARAM_INT);
+    $statement->execute();
+    $postedBy = $statement->fetch(PDO::FETCH_ASSOC);
+    return $postedBy;
 }

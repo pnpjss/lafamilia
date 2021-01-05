@@ -7,8 +7,6 @@ $avatarImage = $_SESSION['user']['avatar'];
 
 <nav>
     <ul>
-
-
         <li><a href="/../../index.php"> la familia</a></li>
         <!-- <li><a href="/../../index.php">New</a></li> -->
         <li><a href="/../../index.php">Threads</a></li>
@@ -34,9 +32,6 @@ $avatarImage = $_SESSION['user']['avatar'];
         <?php if (isset($_SESSION['user'])) : ?>
             <li><img src="<?php echo "app/images/$avatarImage" ?>" width="50px" height="50px" alt=""></li>
         <?php endif; ?>
-
-
-
 
     </ul>
 

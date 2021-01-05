@@ -31,7 +31,6 @@ if (isset($_FILES['avatar'])) {
         $statement->bindParam(':id', $userId, PDO::PARAM_STR);
         $statement->execute();
     }
-
 }
 
 
@@ -46,16 +45,18 @@ if (isset($_FILES['avatar'])) {
 
 ?>
 
-<main><section>
-<form action="edit-avatar.php" method="post" enctype="multipart/form-data">
-                <label for="avatar">Png file required</label>
-                <input type="file" name="avatar" id="avatar" required>
-                <button type="submit">Upload</button>
+<main>
+    <section>
+        <form action="edit-avatar.php" method="post" enctype="multipart/form-data">
+            <label for="avatar">Png file required</label>
+            <input type="file" name="avatar" id="avatar" required>
+            <button type="submit">Upload</button>
 
 
-            </form>
+        </form>
 
-            <br><br>
+        <br><br>
 
-            <img src="<?php echo "/app/images/$avatar" ?>" height="90px" width="90px" alt="">
-            </section></main>
+        <img src="<?php echo "/app/images/$avatar" ?>" height="90px" width="90px" alt="">
+    </section>
+</main>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 require __DIR__ . ('/../autoload.php');
 
@@ -11,6 +11,6 @@ if (isset($_POST['bio'])) {
     $statement->bindParam(':id', $id, PDO::PARAM_STR);
     $statement->execute();
     $_SESSION['user']['biography'] = $bio;
-    
+
     redirect('/../../settings.php');
 }
