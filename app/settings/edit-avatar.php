@@ -33,16 +33,6 @@ if (isset($_FILES['avatar'])) {
     }
 }
 
-
-// shows avatar if pre-exist and/or updates new avatar without need to relog
-// $statement = $pdo->query('SELECT * FROM users WHERE id = :id');
-// $statement->bindParam(':id', $userId, PDO::PARAM_STR);
-// $user = $statement->fetch(PDO::FETCH_ASSOC);
-// $avatar = $user['avatar'];
-// $avatar = $_SESSION['user']['avatar'];
-// funkar inte
-
-
 ?>
 
 <main>

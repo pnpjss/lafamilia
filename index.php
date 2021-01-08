@@ -10,7 +10,7 @@ require __DIR__ . ('/app/views/nav.php');
 
 require __DIR__ . ('/app/views/footer.php');
 
-$statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id;');
+$statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
 
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -30,31 +30,34 @@ $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 <main>
 
     <section>
-        <div class="post-container">
+        <article class="index-container">
             <?php foreach ($posts as $post) : ?>
-                <div class="post-item1"><?php echo $post['username'] ?></div>
-                <div class="post-item2">
-                    <b> <?php echo $post['title']; ?> </b><br>
-                    <a href="<?php echo $post['url']; ?>"><?php echo $post['url']; ?></a>
-                    <div><a href="comments.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a></div>
+
+                <div class="index-title">
+
+                    <h4> <?php echo $post['title']; ?> </h4>
+
+
+                </div>
+                <div class="index-description">
+                    <p><?php echo $post['description'] ?></p>
+                </div>
+                <div class="index-url">
+
+                    <a href="<?= $post['url']; ?>"><?php echo $post['url']; ?></a>
+                </div>
+                <div class="index-poster-info">
+                    <p><?= "by : " . $post['username'] . " - " . $post['post_date']; ?></p>
+
+                    <form action="votes.php">
+
+                    </form>
+                    <a href="comments.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a>
+
                 </div>
 
 
-
             <?php endforeach; ?>
-        </div>
+        </article>
     </section>
 </main>
-
-<!-- 
-
-<?php foreach ($posts as $post) : ?>
-        <?php $title = $post['title'];
-        $url = $post['url'];
-        $date = $post['post_date'];
-        $description = $post['description']; ?>
-        <p><?php echo $title ?></p><br>
-        <br><br><br>
-        <p><?php echo $url ?></p><br>
-        <?php endforeach; ?>
-    <br> -->

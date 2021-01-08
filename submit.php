@@ -1,42 +1,39 @@
-<?php 
+<?php
 
 require __DIR__ . ('/app/autoload.php');
 require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
 
-if(isset($_POST['title'],$_POST['url'], $_POST['description'])){
+if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
     $url = filter_var($_POST['url'], FILTER_SANITIZE_URL);
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
-    
     addPost($pdo, $title, $url, $description);
-
-
 }
 
 ?>
 
 <main>
-<section>
+    <section>
 
-<form action="submit.php" method="post">
-<label for="title">Title:</label>
-<input type="text" name="title">
-<br>
-<label for="url">Url:</label>
-<input type="url" name="url">
-<br>
-<label for="description">Description</label>
-<textarea name="description" id="description" cols="30" rows="10"></textarea>
-<br>
-<button type="submit">Submit</button>
+        <form action="submit.php" method="post">
+            <label for="title">Title:</label>
+            <input type="text" name="title">
+            <br>
+            <label for="url">Url:</label>
+            <input type="url" name="url">
+            <br>
+            <label for="description">Description</label>
+            <textarea name="description" id="description" cols="30" rows="10"></textarea>
+            <br>
+            <button type="submit">Submit</button>
 
-</form>
+        </form>
 
-<?php echo $url; ?>
+        <?php echo 'fixa detta'; ?>
 
-</section>
+    </section>
 </main>
 
 <!-- 

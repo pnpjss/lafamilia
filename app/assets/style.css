@@ -10,38 +10,46 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family: Teko-regular;
-    font-size: 18px;
+    font-family:  Arial, Teko-regular;
+    /* font-size: 14px; */
+    
 }
 
 body{
-    height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(204, 204, 204);
 }
 
 nav{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     background-color: #131313;
     color: white;
     width:100%;
     height: 50px;
-    flex-wrap: nowrap;
     position: fixed;
+    font-size: 14px;
+    max-width: 800px;
 }
 nav .img{
     margin-left: 0;
 }
 ul{
     display: flex;
-    justify-content:space-between ;
+    justify-content:space-evenly ;
     align-items: center;
-    width: 90%;
+    width: 100%;
     list-style: none;
     position: absolute;
+    
 }
 li{
     display: inline-block;
@@ -52,20 +60,25 @@ a:visited{
 }
 
 main{
+
 display: flex;
+justify-content: center;
 height: 100%;
 width: 100%;
 background-color: #4e463a;
+max-width: 800px;
 }
 section {
     display: flex;
     justify-content: center;
     width: 100% ;
-    height:100vh - 50px; /* minus pga navbar*/
-    background: #2c3e50;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to bottom, #c4c9cc, #a6b4c2);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to bottom, #abcce2, #9199a1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    max-width: 800px;
+    min-height:100% ; /* minus pga navbar*/
     margin-top: 50px;
-    }
-    
+    background-color: rgb(231, 231, 231);
+   
+}
+/* 
+background: #e7e7e7;   fallback for old browsers 
+background: -webkit-linear-gradient(to bottom, #c4c9cc, #a6b4c2);  /* Chrome 10-25, Safari 5.1-6 
+background: linear-gradient(to bottom, #abcce2, #9199a1); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

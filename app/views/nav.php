@@ -8,13 +8,9 @@ $avatarImage = $_SESSION['user']['avatar'];
 <nav>
     <ul>
         <li><a href="/../../index.php"> la familia</a></li>
-        <!-- <li><a href="/../../index.php">New</a></li> -->
-        <li><a href="/../../index.php">Threads</a></li>
-        <!-- <li><a href="/../../index.php">Past</a></li>
-        <li><a href="/../../index.php">Comments</a></li> -->
-        <li><a href="/../../index.php">Ask</a></li>
-        <li><a href="/../../index.php">Show</a></li>
-        <li><a href="/../../index.php">jobs</a></li>
+        <li><a href="/../../index.php">Latest</a></li>
+        <li><a href="/../../index.php">Upvoted</a></li>
+
         <li><a href="/../../submit.php">submit</a></li>
 
         <?php if (isset($_SESSION['user'])) : ?>

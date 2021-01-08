@@ -23,7 +23,7 @@ function addPost($pdo, $title, $url, $description)
 {
 
     $userId = $_SESSION['user']['id'];
-    $postDate = date("F j, Y, g:i a");
+    $postDate = date("Y-m-d, H:i");
     $query = "INSERT INTO posts (title, url, description, user_id, post_date) VALUES (:title, :url, :description, :user_id, :post_date)";
     $statement = $pdo->prepare($query);
 
@@ -37,13 +37,15 @@ function addPost($pdo, $title, $url, $description)
     $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
     $statement->bindParam(':post_date', $postDate, PDO::PARAM_STR);
     $statement->execute();
+
+    // msg
 }
 
 function addComment($pdo, $content, $postId)
 {
 
     $userId = $_SESSION['user']['id'];
-    $date = date("F j, Y, g:i a");
+    $date = date("Y-m-d, H:i");
     $query = "INSERT INTO comments (post_id, user_id, content, date) VALUES (:post_id, :user_id, :content, :date)";
     $statement = $pdo->prepare($query);
 
@@ -60,7 +62,20 @@ function addComment($pdo, $content, $postId)
 
 function fetchPost($pdo, $postId)
 {
-    $statement = $pdo->query('SELECT * FROM posts WHERE id = :id');
+
+    $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id;');
+
+
+
+    //under hämtar vi post genom GET[], men blir således utan user
+
+
+
+
+
+
+    $statement = $pdo->query('SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id');
+    // $statement = $pdo->query('SELECT * FROM posts WHERE id = :id');
     $statement->BindParam(':id', $postId, PDO::PARAM_INT);
     $statement->execute();
     $post = $statement->fetch(PDO::FETCH_ASSOC);
@@ -75,11 +90,96 @@ function fetchComments($pdo, $postId)
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $userComments;
 }
+
+function fetchComment($pdo, $commentId)
+{
+    $statement = $pdo->prepare("SELECT * FROM comments WHERE id = :id");
+    $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+    $comment = $statement->fetch(PDO::FETCH_ASSOC);
+    return $comment;
+}
+function commentUpdate($pdo, $commentUpdate, $commentId)
+{
+    $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :commentId");
+    $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
+    $statement->BindParam(':content', $commentUpdate, PDO::PARAM_INT);
+    $statement->execute();
+}
+
 function fetchPostedBy($pdo, $commentUserId)
 {
-    $statement = $pdo->prepare("SELECT username from users where id = :commentUserId");
-    $statement->BindParam(':id', $commentUserId, PDO::PARAM_INT);
+    $statement = $pdo->prepare("SELECT username, avatar from users where id = :commentUserId");
+    $statement->BindParam(':commentUserId', $commentUserId, PDO::PARAM_INT);
     $statement->execute();
     $postedBy = $statement->fetch(PDO::FETCH_ASSOC);
     return $postedBy;
 }
+
+
+
+
+
+
+//  REGISTER USER
+// String to lower?
+
+function checkUsername($pdo, $username)
+{
+    $statement = $pdo->prepare("SELECT username FROM users WHERE username = :username");
+    $statement->BindParam(':username', $username, PDO::PARAM_STR);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($user === false) {
+        return $username;
+    } else {
+        exit(redirect('register.php?signup=username'));
+    }
+}
+
+function checkPassword($pwd, $pwdConfirm)
+{
+    if ($pwd !== $pwdConfirm) {
+        exit(redirect('register.php?signup=password'));
+    } else {
+        $pwd = password_hash($pwd, PASSWORD_DEFAULT);
+        return $pwd;
+    }
+}
+
+function checkEmail($pdo, $email)
+{
+    $statement = $pdo->prepare('SELECT email FROM users WHERE email = :email');
+    $statement->BindParam(':email', $email, PDO::PARAM_STR);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($user === false) {
+        return $email;
+    } else {
+        exit(redirect('register.php?signup=email'));
+    }
+}
+
+function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
+{
+
+    $query = "INSERT INTO users (username, email, firstname, lastname, passwd) VALUES (:username, :email, :firstname, :lastname, :pwd)";
+    $statement = $pdo->prepare($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(':username', $username, PDO::PARAM_STR);
+    $statement->bindParam(':email', $email, PDO::PARAM_STR);
+    $statement->bindParam(':firstname', $firstName, PDO::PARAM_STR);
+    $statement->bindParam(':lastname', $lastName, PDO::PARAM_STR);
+    $statement->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+    $statement->execute();
+
+    exit(redirect('register.php?signup=succes'));
+}
+
+
+// funktion som ser att allt är satt
+//byt till checkVarExists ?
