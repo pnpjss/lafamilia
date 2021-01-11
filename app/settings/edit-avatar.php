@@ -10,6 +10,10 @@ $avatar = $_SESSION['user']['avatar'];
 
 $userId = $_SESSION['user']['id'];
 
+
+
+
+
 if (isset($_FILES['avatar'])) {
     $image = $_FILES['avatar'];
     $imageName = $image['name'];

@@ -16,8 +16,6 @@ if (isset($_POST['comment'])) {
 
 // behöver nog redirect till en annan sida fan:/ bensträckare nu
 
-redirect("'/../comment' . $commentId" . ".php")
-
 
 ?>
 

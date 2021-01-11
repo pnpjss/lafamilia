@@ -38,6 +38,10 @@ function addPost($pdo, $title, $url, $description)
     $statement->bindParam(':post_date', $postDate, PDO::PARAM_STR);
     $statement->execute();
 
+
+    // fetcha post ID!!
+    exit(redirect('/../index.php'));
+
     // msg
 }
 
@@ -63,19 +67,7 @@ function addComment($pdo, $content, $postId)
 function fetchPost($pdo, $postId)
 {
 
-    $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id;');
-
-
-
-    //under hämtar vi post genom GET[], men blir således utan user
-
-
-
-
-
-
     $statement = $pdo->query('SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id');
-    // $statement = $pdo->query('SELECT * FROM posts WHERE id = :id');
     $statement->BindParam(':id', $postId, PDO::PARAM_INT);
     $statement->execute();
     $post = $statement->fetch(PDO::FETCH_ASSOC);
@@ -163,9 +155,9 @@ function checkEmail($pdo, $email)
 function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
 {
 
-    $query = "INSERT INTO users (username, email, firstname, lastname, passwd) VALUES (:username, :email, :firstname, :lastname, :pwd)";
+    $query = "INSERT INTO users (username, email, firstname, lastname, passwd, avatar) VALUES (:username, :email, :firstname, :lastname, :pwd, :avatar)";
     $statement = $pdo->prepare($query);
-
+    $avatar = 'noavatar.png';
     if (!$statement) {
         die(var_dump($pdo->errorInfo()));
     }
@@ -175,6 +167,7 @@ function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
     $statement->bindParam(':firstname', $firstName, PDO::PARAM_STR);
     $statement->bindParam(':lastname', $lastName, PDO::PARAM_STR);
     $statement->bindParam(':pwd', $pwd, PDO::PARAM_STR);
+    $statement->bindParam(':avatar', $avatar, PDO::PARAM_STR);
     $statement->execute();
 
     exit(redirect('register.php?signup=succes'));
@@ -183,3 +176,69 @@ function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
 
 // funktion som ser att allt är satt
 //byt till checkVarExists ?
+
+
+function addLike($pdo,  $postId, $userId)
+{
+
+    $query = "INSERT INTO upvotes (user_id, post_id) VALUES (:user_id, :post_id)";
+    $statement = $pdo->prepare($query);
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->bindParam(':post_id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    exit(redirect('/../index.php'));
+}
+
+function deleteLike($pdo, $postId,  $userId)
+{
+    $query = "DELETE FROM upvotes WHERE user_id = :user_id AND post_id = :post_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->bindParam(':post_id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+
+    exit(redirect('/../index.php'));
+}
+
+
+
+
+function fetchLikes($pdo, $postId)
+{
+    $query = "SELECT COUNT(*) FROM upvotes WHERE post_id = :post_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':post_id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+    $likeCount = $statement->fetch(PDO::FETCH_ASSOC);
+    return $likeCount;
+}
+function checkIfUserIdLikedPost($pdo, $likePostId, $userId)
+{
+    $query = "SELECT COUNT(*) FROM upvotes WHERE post_id = :post_id AND user_id = :user_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':post_id', $likePostId, PDO::PARAM_STR);
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->execute();
+    $likeCheck = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($likeCheck['COUNT(*)'] > 0) {
+        $likeCheck = $likeCheck['COUNT(*)'];
+        return $likeCheck;
+    }
+}
+
+function fetchMostLiked($pdo)
+{
+
+    $query = "SELECT posts.*, COUNT(*) AS 'likes' FROM posts INNER JOIN upvotes ON upvotes.post_id = posts.id GROUP BY posts.id ORDER BY COUNT(*) DESC";
+    $statement = $pdo->prepare($query);
+    $statement->execute();
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
+};

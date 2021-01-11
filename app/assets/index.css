@@ -6,7 +6,7 @@ display: flex;
 width: 90%;
 height:auto;
 flex-wrap: wrap;
-background-color: rgb(250, 250, 250);
+background-color: rgb(221, 221, 221);
 border: 1px solid rgb(228, 228, 228);
 border-top: none;
 padding: 0.4rem ;
@@ -44,11 +44,25 @@ padding: 0.4rem ;
     width: 100%;
     font-size: 14px;
     color: rgb(95, 95, 95);
-    border-bottom: solid 1px chocolate;
+    
 }
 .index-poster-info a {
     color: rgb(95, 95, 95);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.index-poster-likes {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: rgb(221, 221, 221);
+    border: none;
+    border-bottom: solid 1px chocolate;
+    
+    
+}
+.index-poster-likes button {
+    border: none;
+    background-color: rgb(221, 221, 221);
 }

@@ -62,6 +62,7 @@ if (isset($_GET['id'])) {
                     $commentUserId = $comment['user_id'];
                     $postedBy = fetchPostedBy($pdo, $commentUserId); ?>
                     <div class="avatar">
+
                         <img src="<?php echo "/app/images/" . $postedBy['avatar']; ?>" height="50px" width="50px" alt="">
                     </div>
 
@@ -79,11 +80,12 @@ if (isset($_GET['id'])) {
                             <a href="<?php echo 'edit-comment.php?comment-id=' . $comment['id'] ?>">edit</a>
                         <?php endif; ?>
                     </div>
+                    <span class="comment-span"></span>
                 <?php endforeach; ?>
                 <div class="add-comment">
                     <form action="comments.php?id=<?= $postId; ?>" method="post">
 
-                        <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="350"></textarea>
+                        <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="200"></textarea>
 
                         <button type="text"> Submit comment </button>
 

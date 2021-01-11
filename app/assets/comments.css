@@ -4,9 +4,9 @@
     
     width: 90%;
     height:fit-content;
-    background-color: rgb(241, 241, 241);
+    
     word-wrap: break-word;
-    border: 1px solid rgb(27, 27, 27);
+    /* border: 1px solid rgb(27, 27, 27); */
     border-top: 0;
 }
 .comments-postitem > .title, .description, .url, .postinfo {
@@ -56,8 +56,9 @@
     
     width: 100% ;
     height: auto;
-    background-color: rgb(250, 250, 250);
+    background-color: rgb(221, 221, 221);
     align-items: flex-start;
+    margin-bottom: 1.5rem;
 }
 .comments-items > * {
     margin: 0.4rem 0 0.4rem ;
@@ -88,7 +89,7 @@
     padding-right: 0.4rem;
     padding-top: 0.4rem;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     color: rgb(0, 0, 0);
 }
 .comments-items .comment-edit {
@@ -98,9 +99,18 @@
     padding-right: 2rem;
     font-size: 14px;
     
+    
 }
 .comment-edit a {
     color: rgb(15, 15, 15);
+}
+.comment-span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(231, 231, 231);
 }
 
 

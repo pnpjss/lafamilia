@@ -10,8 +10,8 @@
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family:  Arial, Teko-regular;
-    /* font-size: 14px; */
+    font-family:  Verdana, Geneva, Tahoma, sans-serif, Arial, Teko-regular;
+    font-size: 14px;
     
 }
 
@@ -24,7 +24,7 @@ body{
     position: absolute;
     margin-left: auto;
     margin-right: auto;
-    background-color: rgb(204, 204, 204);
+    background-color: rgb(214, 214, 214);
 }
 
 nav{
@@ -39,8 +39,9 @@ nav{
     font-size: 14px;
     max-width: 800px;
 }
-nav .img{
+nav img{
     margin-left: 0;
+    border-radius: 50%;
 }
 ul{
     display: flex;
