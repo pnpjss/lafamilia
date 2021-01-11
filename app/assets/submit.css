@@ -1,0 +1,18 @@
+.submit-grid-container{
+    display: grid;
+    width: 80%;
+    height: 100%;
+    grid-template-columns: 80%;
+    grid-template-rows:repeat(6, auto);
+  
+    grid-row-gap: 1rem;
+    background-color: rgb(221, 221, 221);
+    justify-content: center;
+    align-items: center;
+    padding: 2.5rem 0.4rem 2.5rem 0.4rem;
+}
+.submit-items input {
+width: 80%;
+}
+.submit-items .description
+{}

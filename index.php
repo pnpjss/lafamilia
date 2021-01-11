@@ -9,15 +9,16 @@ require __DIR__ . ('/app/views/nav.php');
 
 require __DIR__ . ('/app/views/footer.php');
 
+// Fetch all posts from database and sort by date
+
 $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
 
-$userId = $_SESSION['user']['id'];
-// FRÅGA VINCENT OM DENNA
-
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
-if (!isset($_SESSION['user']['avatar'])) {
-    $avatarImage = '/noavatar.png';
-}
+
+// Set logged in users id
+
+$userId = $_SESSION['user']['id'];
+// FRÅGA VINCENT OM DENNA!
 
 ?>
 
@@ -31,21 +32,16 @@ if (!isset($_SESSION['user']['avatar'])) {
                 <?php $likeCount = fetchLikes($pdo, $postId); ?>
                 <?php $likeCheck = checkIfUserIdLikedPost($pdo, $postId, $userId); ?>
                 <div class="index-title">
-
-                    <h4> <?php echo $post['title']; ?> </h4>
-
-
+                    <h4> <?= $post['title']; ?> </h4>
                 </div>
                 <div class="index-description">
-                    <p><?php echo $post['description'] ?></p>
+                    <p><?= $post['description'] ?></p>
                 </div>
                 <div class="index-url">
-
-                    <a href="<?= $post['url']; ?>"><?php echo $post['url']; ?></a>
+                    <a href="<?= $post['url']; ?>"><?= $post['url']; ?></a>
                 </div>
                 <div class="index-poster-info">
                     <p><?= "by : " . $post['username'] . " - " . $post['post_date']; ?></p>
-
                     <a href="comments.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a>
                 </div>
 

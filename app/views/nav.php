@@ -8,7 +8,7 @@ $avatarImage = $_SESSION['user']['avatar'];
 <nav>
     <ul>
         <li><a href="/../../index.php"> la familia</a></li>
-        <li><a href="/../../index.php">Latest</a></li>
+
         <li><a href="/../../upvotes.php">Upvoted</a></li>
 
         <li><a href="/../../submit.php">submit</a></li>

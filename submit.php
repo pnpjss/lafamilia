@@ -12,26 +12,35 @@ if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
     addPost($pdo, $title, $url, $description);
 }
 
+// gör så man måste logga in!
+
+
+
+
 ?>
 
 <main>
     <section>
 
-        <form action="submit.php" method="post">
-            <label for="title">Title:</label>
-            <input type="text" name="title">
-            <br>
-            <label for="url">Url:</label>
-            <input type="url" name="url">
-            <br>
-            <label for="description">Description</label>
-            <textarea name="description" id="description" cols="30" rows="10"></textarea>
-            <br>
-            <button type="submit">Submit</button>
-
+        <form class="submit-grid-container" action="submit.php" method="post">
+            <div class="submit-items title">
+                <label for="title"></label>
+                <input type="text" name="title" placeholder="Title">
+            </div>
+            <div class="submit-items url">
+                <label for="url"></label>
+                <input type="url" name="url" placeholder="Url">
+            </div>
+            <div class="submit-items description">
+                <label for="description"></label>
+                <textarea name="description" id="description" cols="30" rows="6" placeholder="Article description"></textarea>
+            </div>
+            <div class="submit-items btn">
+                <button type="submit">Submit</button>
+            </div>
         </form>
 
-        <?php echo 'fixa detta'; ?>
+
 
     </section>
 </main>

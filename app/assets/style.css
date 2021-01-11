@@ -38,6 +38,7 @@ nav{
     position: fixed;
     font-size: 14px;
     max-width: 800px;
+    
 }
 nav img{
     margin-left: 0;
@@ -55,6 +56,9 @@ ul{
 li{
     display: inline-block;
     cursor: pointer;
+}
+a {
+    color :ivory;
 }
 a:visited{
     color :rgb(124, 124, 158);
@@ -79,7 +83,3 @@ section {
     background-color: rgb(231, 231, 231);
    
 }
-/* 
-background: #e7e7e7;   fallback for old browsers 
-background: -webkit-linear-gradient(to bottom, #c4c9cc, #a6b4c2);  /* Chrome 10-25, Safari 5.1-6 
-background: linear-gradient(to bottom, #abcce2, #9199a1); W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */

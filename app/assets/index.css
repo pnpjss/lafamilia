@@ -10,7 +10,7 @@ background-color: rgb(221, 221, 221);
 border: 1px solid rgb(228, 228, 228);
 border-top: none;
 padding: 0.4rem ;
-
+padding-bottom: 2.5rem;
 }
 /* .index-container > * {
     height: auto;
@@ -20,13 +20,15 @@ padding: 0.4rem ;
     height : auto;
     width: 100%;
     margin-top: 1rem;
+    
 }
 .index-description {
     height : auto;
     word-break: break-all;
  
-  	width:400px;
+  	width:90%;
     font-size: 16px;
+    color: rgb(43, 43, 43);
 }
 .index-url{
     width: 80%;
@@ -65,4 +67,5 @@ padding: 0.4rem ;
 .index-poster-likes button {
     border: none;
     background-color: rgb(221, 221, 221);
+    padding-bottom: 0.4rem;
 }

@@ -5,6 +5,7 @@ require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
 $posts = fetchMostLiked($pdo);
+// saknar posted by- fixa
 
 
 ?>
@@ -13,30 +14,57 @@ $posts = fetchMostLiked($pdo);
 <main>
 
     <section>
-        <div class="upvotes-container">
+        <article class="index-container">
             <?php foreach ($posts as $post) : ?>
 
-                <div class="upvotes-title">
+                <?php $postId = $post['id']; ?>
+                <?php $likeCount = fetchLikes($pdo, $postId); ?>
+                <?php $likeCheck = checkIfUserIdLikedPost($pdo, $postId, $userId); ?>
+                <div class="index-title">
 
                     <h4> <?php echo $post['title']; ?> </h4>
 
 
                 </div>
-                <div class="upvotes-description">
+                <div class="index-description">
                     <p><?php echo $post['description'] ?></p>
                 </div>
-                <div class="upvotes-url">
+                <div class="index-url">
 
-                    <a href="<?php echo $post['url']; ?>"><?php echo $post['url']; ?></a>
+                    <a href="<?= $post['url']; ?>"><?php echo $post['url']; ?></a>
                 </div>
-                <div class="upvotes-poster-info">
-                    <p><?php echo "by : " . $post['username']; ?></p>
-                    <a href="upvotes.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a>
+                <div class="index-poster-info">
+                    <p><?= "by : " . $post['username'] . " - " . $post['post_date']; ?></p>
+
+                    <a href="comments.php?id=<?= $post['id'] ?>&title=<?= $post['title'] ?>">comment</a>
+                </div>
+
+                <div class="index-poster-likes">
+
+
+                    <?php if (isset($likeCheck)) : ?>
+
+                        <form action="dislike.php" method="post">
+                            <label for="dislike"></label>
+                            <input type="hidden" name="dislike" id="post_id" value="<?= $post['id']; ?>">
+                            <button type="submit"><img src="dislike.png" height="15px" width="15px" alt=""></button>
+                        </form>
+
+                    <?php elseif (!$likeCheck) : ?>
+                        <form action="like.php" method="post">
+                            <label for="like"></label>
+                            <input type="hidden" name="like" id="post_id" value="<?= $post['id'] ?>">
+                            <button type="submit"><img src="likes.png" height=15px width="15px" alt=""></button>
+
+                        </form>
+
+                    <?php endif; ?>
+                    <?= $likeCount['COUNT(*)'] . ' likes ' ?>
 
                 </div>
 
 
             <?php endforeach; ?>
-        </div>
+        </article>
     </section>
 </main>

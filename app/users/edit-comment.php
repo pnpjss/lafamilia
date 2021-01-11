@@ -1,7 +1,7 @@
 <?php
-require __DIR__ . ('/app/autoload.php');
-require __DIR__ . ('/app/views/header.php');
-require __DIR__ . ('/app/views/nav.php');
+require __DIR__ . ('/../autoload.php');
+require __DIR__ . ('/../views/header.php');
+require __DIR__ . ('/../views/nav.php');
 
 if (isset($_GET['comment-id'])) {
     $commentId = $_GET['comment-id'];
@@ -22,11 +22,15 @@ if (isset($_POST['comment'])) {
 
 <main>
     <section>
-        <form action="<?php echo 'edit-comment.php?comment-id=' . $comment['id'] ?>" method="post">
+        <form action="<?= 'edit-comment.php?comment-id=' . $comment['id'] ?>" method="post">
             <label for="comment"></label>
             <textarea name="comment" id="" cols="30" rows="10"><?php echo $comment['content'] ?></textarea>
             <button type="submit">Save comment</button>
 
+        </form>
+
+        <form action="<?= 'delete-comment.php?delete-id=' . $comment['id'] ?>" method="post">
+            <button type="submit">Delete comment</button>
         </form>
 
 

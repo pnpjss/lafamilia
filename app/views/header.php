@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/app/assets/settings.css">
     <link rel="stylesheet" href="/app/assets/index.css">
     <link rel="stylesheet" href="/app/assets/comments.css">
+    <link rel="stylesheet" href="/app/assets/submit.css">
     <title>Document</title>
 </head>
 

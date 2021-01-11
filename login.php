@@ -10,7 +10,7 @@ require __DIR__ . ('/app/views/nav.php');
 <main>
     <section>
         <form class="login-grid-container" action="/app/users/login.php" method="POST" autocomplete="off">
-            <div class="item1"> <img src="pic.png" height="75px" width="75px" alt=""></div>
+            <div class="login-grid image"> <img src="/app/images/noavatar.png" height="75px" width="75px" alt=""></div>
             <div class="item2"> <label for="username"></label><input type="text" name="username" id="username" placeholder="username/email"></div>
             <div class="item3"> <label for="pwd"></label><input type="password" name="pwd" id="pwd" placeholder="password"> </div>
             <div class="item4"> <button type="submit" class="loginbtn">Login</button> </div>
