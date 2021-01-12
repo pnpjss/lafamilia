@@ -1,15 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require __DIR__ . ('/../autoload.php');
-require __DIR__ . ('/../views/header.php');
-require __DIR__ . ('/../views/nav.php');
-
-
 
 $currentEmail = $_SESSION['user']['email'];
-
-
-
 
 if (isset($_POST['currentemail'], $_POST['newemail'])) {
     $inputold = filter_var($_POST['username'], FILTER_SANITIZE_EMAIL);
@@ -37,25 +32,3 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
     // $statement->bindParam(':username', $username, PDO::PARAM_STR);
     // $statement->execute();
 }
-
-
-?>
-<main>
-    <section>
-
-        <h2>
-            Change email
-        </h2>
-
-        <form action="edit-email.php" method="POST">
-
-            <label for="newemail">Current Email</label>
-            <input type="text" name="newemail" id="newemail" placeholder="Curre email">
-            <label for="newemail">New Email</label>
-            <input type="text" name="newemail" id="newemail" placeholder="New email">
-
-            <button type="submit">submit changes</button>
-
-        </form>
-    </section>
-</main>

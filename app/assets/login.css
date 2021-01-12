@@ -1,9 +1,8 @@
 .login-grid-container{
-    color: white;
+    
     display: grid;
     height: 100%;
-    width: 75%;
-    grid-template-columns: 50%;
+    width: 80%;
     grid-template-rows:repeat(6, 6rem);
     padding-top: 3rem;
     justify-content: center;
@@ -49,4 +48,9 @@ color:#131313;
 }
 
 .loginbtn:focus{outline:none}
+
+.login-item-error {
+    height: 50%;
+}
+
 

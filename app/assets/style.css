@@ -51,7 +51,7 @@ ul{
     width: 100%;
     list-style: none;
     position: absolute;
-    
+    padding: 0;
 }
 li{
     display: inline-block;
@@ -83,3 +83,10 @@ section {
     background-color: rgb(231, 231, 231);
    
 }
+/* button {
+    border:1px solid #131313;
+height :2.5rem;
+width: 8rem;
+background-color: rgba(0, 0, 255, 0);
+color:#131313;
+} */

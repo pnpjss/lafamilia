@@ -6,8 +6,7 @@ require __DIR__ . ('/app/views/nav.php');
 
 if (!isset($_SESSION['user'])) {
 
-    redirect('/index.php');
-    // fixa session error?
+    redirect('/login.php?login=submit');
 }
 
 if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {

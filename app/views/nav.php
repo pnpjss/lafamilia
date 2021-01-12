@@ -9,7 +9,7 @@ $avatar = $_SESSION['user']['avatar'];
     <ul>
         <li><a href="/../../index.php"> la familia</a></li>
 
-        <li><a href="/../../upvotes.php">Upvoted</a></li>
+        <li><a href="/../../top-posts.php">Upvoted</a></li>
 
         <li><a href="/../../submit.php">submit</a></li>
 
