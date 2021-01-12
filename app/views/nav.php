@@ -26,7 +26,7 @@ $avatarImage = $_SESSION['user']['avatar'];
         <?php endif; ?>
 
         <?php if (isset($_SESSION['user']['avatar'])) : ?>
-            <li><img src="<?php echo "app/images/$avatarImage" ?>" width="50px" height="50px" alt=""></li>
+            <li><img src="<?php echo "app/images/$avatarImage" ?>" width="35px" height="35px" alt=""></li>
 
         <?php endif; ?>
 

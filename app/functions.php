@@ -240,8 +240,14 @@ function checkIfUserIdLikedPost($pdo, $likePostId, $userId)
 
 function fetchMostLiked($pdo)
 {
-
-    $query = "SELECT posts.*, COUNT(*) AS 'likes' FROM posts INNER JOIN upvotes ON upvotes.post_id = posts.id GROUP BY posts.id ORDER BY COUNT(*) DESC";
+    // saknar ju username här det suger lite
+    $query = "SELECT COUNT(upvotes.post_id) AS votes, posts.*, users.username FROM upvotes
+    INNER JOIN posts
+    ON posts.id = upvotes.post_id
+    INNER JOIN users 
+    ON posts.user_id = users.id
+    GROUP BY 
+    posts.id;";
     $statement = $pdo->prepare($query);
     $statement->execute();
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);

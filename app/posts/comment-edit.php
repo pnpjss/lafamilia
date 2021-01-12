@@ -22,14 +22,14 @@ if (isset($_POST['comment'])) {
 
 <main>
     <section>
-        <form action="<?= 'edit-comment.php?comment-id=' . $comment['id'] ?>" method="post">
+        <form action="<?= 'comment-edit.php?comment-id=' . $comment['id'] ?>" method="post">
             <label for="comment"></label>
             <textarea name="comment" id="" cols="30" rows="10"><?php echo $comment['content'] ?></textarea>
             <button type="submit">Save comment</button>
 
         </form>
 
-        <form action="<?= 'delete-comment.php?delete-id=' . $comment['id'] ?>" method="post">
+        <form action="<?= 'comment-delete.php?delete-id=' . $comment['id'] ?>" method="post">
             <button type="submit">Delete comment</button>
         </form>
 
