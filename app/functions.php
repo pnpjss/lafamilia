@@ -253,3 +253,41 @@ function fetchMostLiked($pdo)
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 };
+
+
+
+
+function changeBio($pdo, $userId, $bio)
+{
+    $statement = $pdo->prepare("UPDATE users SET biography = :bio WHERE id = :id");
+    $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
+    $statement->bindParam(':id', $userId, PDO::PARAM_STR);
+    $statement->execute();
+    $_SESSION['user']['biography'] = $bio;
+    exit(redirect('/../../settings.php'));
+}
+
+function updateAvatar($pdo, $image, $userId)
+{
+    die(var_dump($image));
+    $imageName = $image['name'];
+    $imageTempName = $image['tmp_name'];
+    $imageType = $image['type'];
+    $imageSize = $image['size'];
+
+    $imageExt = explode('.', $imageName);
+    $imageActualExt = strtolower(end($imageExt));
+
+    if ($imageActualExt === 'png' && $imageSize < 1000000) {
+        $imageNewName = uniqid('', true) . "." . $imageActualExt;
+        $imageDestination = '/images' . $imageNewName;
+        move_uploaded_file($imageTempName, $imageDestination);
+
+        $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':avatar', $imageNewName, PDO::PARAM_STR);
+        $statement->bindParam(':id', $userId, PDO::PARAM_STR);
+        $statement->execute();
+    }
+    exit(redirect('/../settings.php'));
+};

@@ -4,15 +4,7 @@ require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
 
-
-
-$avatar = $_SESSION['user']['avatar'];
-
 $userId = $_SESSION['user']['id'];
-
-
-
-
 
 if (isset($_FILES['avatar'])) {
     $image = $_FILES['avatar'];
@@ -35,22 +27,6 @@ if (isset($_FILES['avatar'])) {
         $statement->bindParam(':id', $userId, PDO::PARAM_STR);
         $statement->execute();
     }
+    $_SESSION['user']['avatar'] = $imageNewName;
+    exit(redirect('/../../settings.php'));
 }
-
-?>
-
-<main>
-    <section>
-        <form action="edit-avatar.php" method="post" enctype="multipart/form-data">
-            <label for="avatar">Png file required</label>
-            <input type="file" name="avatar" id="avatar" required>
-            <button type="submit">Upload</button>
-
-
-        </form>
-
-        <br><br>
-
-        <img src="<?php echo "/app/images/$avatar" ?>" height="90px" width="90px" alt="">
-    </section>
-</main>

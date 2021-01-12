@@ -5,50 +5,92 @@ require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
 $user = $_SESSION['user'];
+$userId = $_SESSION['user']['id'];
 
+// if (isset($_POST['bio'])) {
+//     $bio = filter_var($_POST['bio'], FILTER_SANITIZE_STRING);
+//     $bio = changeBio($pdo, $userId, $bio);
+// }
+if (isset($_FILES['avatar'])) {
+    $image = $_FILES['avatar'];
+    $imageName = $image['name'];
+    $imageTempName = $image['tmp_name'];
+    // $imageType = $image['type'];
+    $imageSize = $image['size'];
+
+    $imageExt = explode('.', $imageName);
+    $imageActualExt = strtolower(end($imageExt));
+
+    if ($imageActualExt === 'png' && $imageSize < 1000000) {
+        $imageNewName = uniqid('', true) . "." . $imageActualExt;
+        $imageDestination = '/app/images/' . $imageNewName;
+
+        move_uploaded_file($imageTempName, $imageDestination);
+
+        $query = "UPDATE users SET avatar = :avatar WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':avatar', $imageNewName, PDO::PARAM_STR);
+        $statement->bindParam(':id', $userId, PDO::PARAM_STR);
+        $statement->execute();
+    }
+    // exit(redirect('/../settings.php'));
+}
 
 ?>
 
 <main>
     <section>
 
-        <div class="settings-grid">
-            <div class="grid-item1">
-                <p>user: </p> <br>
-                <p>email: </p> <br>
+        <div class="settings-grid-container">
+            <div class="settings-item info-left">
+                <p>user: </p>
+                <p>email: </p>
+                <p>firstname: </p>
+                <p>lastname: </p>
 
             </div>
-            <div class="grid-item2">
-                <p><?php echo $user['username'] ?></p> <br>
-                <p> <?php echo $user['email'] ?></p> <br>
-            </div>
-            <div class="grid-item3">
-                <p>settings</p>
-            </div>
-            <div class="grid-item4">
-                <a href="/app/settings/edit-avatar.php">edit avatar</a><br>
-                <a href="/app/settings/edit-password.php">edit password</a><br>
-                <a href="/app/settings/edit-email.php">edit email</a><br>
-
+            <div class="settings-item info-right">
+                <p><?= $user['username'] ?></p>
+                <p> <?= $user['email'] ?></p>
+                <p> <?= $user['firstname'] ?></p>
+                <p> <?= $user['lastname'] ?></p>
 
             </div>
-            <div class="grid-item5">Bio</div>
-            <div class="grid-item6">
-                <form action="/app/settings/edit-bio.php" method="POST">
-                    <label for="bio"></label>
-                    <textarea name="bio" id="bio" cols="30" rows="6" placeholder="Add some info" maxlength="100"><?php echo $user['biography']; ?></textarea><br>
-                    <button type="submit">Update bio</button>
+            <div class="settings-item var-left">
+                <div> <a href="/../../user-posts.php">my posts</a></div>
+                <div> <a href="/app/users/delete-user.php"> delete user </a></div>
+            </div>
+            <div class="settings-item avatar">
+                <img src="<?= '/app/images/' . $_SESSION['user']['avatar']; ?>" width="75px" height="75px" alt="">
+                <form class="settings-item avatar-form" action="/app/settings/edit-avatar.php" method="post" enctype="multipart/form-data">
+                    <label for="avatar"></label>
+                    <input type="file" name="avatar" id="avatar" required>
+
+
+
+                    <button type="submit">Upload</button>
                 </form>
             </div>
-            <div class="grid-item7">
-                <a href="/app/users/delete-user.php"> delete user </a>
-                <a href="/app/users/user-posts.php">my posts</a><br>
-            </div>
+            <div>aa</div>
+            <div>aa</div>
+            <div>aa</div>
+            <!-- <div class="grid-item4">
+
+
+                <div class="grid-item5">Bio</div>
+                <div class="grid-item6">
+                    <form action="settings.php" method="POST">
+                        <label for="bio"></label>
+                        <textarea name="bio" id="bio" cols="30" rows="6" placeholder="Add some info" maxlength="100"></textarea>
+                        <button type="submit">Update bio</button>
+                    </form>
+                </div>
+                <div class="grid-item7">
+
+                </div> -->
 
         </div>
 
 
     </section>
 </main>
-
-<?php require __DIR__ . ('/../views/footer.php'); ?>

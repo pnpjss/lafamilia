@@ -28,7 +28,7 @@
 input {
     border-style: none;
     border-bottom: 1px solid #131313;
-    height: 2rem;
+    height: auto;
     background-color: rgba(0, 0, 255, 0);
     color:#131313;
     text-align: center;

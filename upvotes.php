@@ -18,7 +18,6 @@ $posts = fetchMostLiked($pdo);
             <?php foreach ($posts as $post) : ?>
 
                 <?php $postId = $post['id']; ?>
-                <?php $likeCount = fetchLikes($pdo, $postId); ?>
                 <?php $likeCheck = checkIfUserIdLikedPost($pdo, $postId, $userId); ?>
                 <div class="index-title">
 
@@ -59,7 +58,7 @@ $posts = fetchMostLiked($pdo);
                         </form>
 
                     <?php endif; ?>
-                    <?= $likeCount['COUNT(*)'] . ' likes ' ?>
+                    <?= $post['votes'] . ' likes ' ?>
 
                 </div>
 

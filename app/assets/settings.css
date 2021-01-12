@@ -1,15 +1,37 @@
-.settings-grid{
+.settings-grid-container{
     display: grid;
     height: 100%;
-    width: 100%;
-    padding:2rem;
-    grid-template-columns: 25% 75%;
-    grid-template-rows:repeat(4, 25%) ;
+    width: 80%;
+    padding:1rem;
+    grid-template-columns: 33% 66%;
+    grid-template-rows:repeat(6, auto) ;
     border:1px solid coral;
     font-size: 12px;
     grid-column-gap: 0.5rem;
+    grid-row-gap: 1rem;
 }
-.grid-item3{
+
+.settings-info .var-left a{
+width: 100%;
+
+}
+.settings-item .avatar-form{
+    display: flex;
+
+
+    flex-wrap: wrap;
+}
+.settings-item .avatar-form button {
+    margin-top: 3rem;
+}
+
+
+
+/* .settings-grid-container > a {
+    width: 100%;
+} */
+
+/* .grid-item3{
     color :white;
 }
 #bio{
@@ -18,4 +40,4 @@
 }
 .grid-item5, .grid-item6{
     max-height: fit-content;
-}
+} */

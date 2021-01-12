@@ -1,7 +1,7 @@
 <?php //Abow css fuck that 
 
 
-$avatarImage = $_SESSION['user']['avatar'];
+$avatar = $_SESSION['user']['avatar'];
 
 ?>
 
@@ -22,11 +22,11 @@ $avatarImage = $_SESSION['user']['avatar'];
         <?php endif; ?>
 
         <?php if (isset($_SESSION['user'])) : ?>
-            <li><a href="/../../settings.php"><?php echo $_SESSION['user']['username'] ?></a></li>
+            <li><a href="/../../settings.php"><?= $_SESSION['user']['username'] ?></a></li>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['user']['avatar'])) : ?>
-            <li><img src="<?php echo "app/images/$avatarImage" ?>" width="35px" height="35px" alt=""></li>
+            <li><img src="<?= "app/images/" . $_SESSION['user']['avatar'] ?>" width="35px" height="35px" alt=""></li>
 
         <?php endif; ?>
 
