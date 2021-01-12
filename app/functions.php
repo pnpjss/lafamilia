@@ -91,17 +91,16 @@ function fetchComment($pdo, $commentId)
     $comment = $statement->fetch(PDO::FETCH_ASSOC);
     return $comment;
 }
-function commentUpdate($pdo, $commentUpdate, $commentId)
+function commentUpdate($pdo, $commentUpdate, $commentId, $postId)
 {
 
 
-    $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :commentId");
+    $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :id");
     $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
     $statement->BindParam(':content', $commentUpdate, PDO::PARAM_STR);
     $statement->execute();
 
-    // Fixa redirect
-
+    exit(redirect('/comments.php?id=' . $postId));
 }
 
 function fetchPostedBy($pdo, $commentUserId)
@@ -269,7 +268,7 @@ function changeBio($pdo, $userId, $bio)
 
 function updateAvatar($pdo, $image, $userId)
 {
-    die(var_dump($image));
+
     $imageName = $image['name'];
     $imageTempName = $image['tmp_name'];
     $imageType = $image['type'];

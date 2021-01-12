@@ -77,7 +77,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="comment-edit">
                         <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
-                            <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] ?>">edit</a>
+                            <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">edit</a>
                         <?php endif; ?>
                     </div>
                     <span class="comment-span"></span>
@@ -99,59 +99,3 @@ if (isset($_GET['id'])) {
 
     </section>
 </main>
-
-
-<!-- 
-<main>
-    <section>
-
-        <div class="comments-grid-container">
-
-            <div class="comments-postitem">
-                <div class="title">
-                    <h3><?php echo $post['title']; ?></h3>
-                </div>
-                <div class="url"><a href="<?php echo $post['url']; ?>"><?php echo $post['url']; ?></a></div>
-                <div class="postinfo">
-                    <p><?= $post['post_date'] . "posted by: " . $post['username']; ?></p>
-                </div>
-            </div>
-
-
-            <?php foreach ($userComments as $comment) : ?>
-                <div class="user-comments">
-                    <b><?php echo $comment['user_id']; ?></b>
-                    <?php$commentUserId = $comment['user_id'];
-                    $commentUserId = $comment['user_id'];
-                    $postedBy = fetchPostedBy($pdo, $commentUserId);
-
-                    echo $postedBy['username']; ?>
-                    <?php $commentersAvatar = $postedBy['avatar']; ?>
-
-
-                    <img src="<?php echo "/app/images/$commentersAvatar" ?>" width="50px" height="50px" alt="">
-
-                </div>
-
-            <?php endforeach; ?>
-
-            <div class="add-comment">
-                <form action="comments.php?id=<?= $postId; ?>" method="post">
-
-                    <textarea name="comment" id="comment" cols="30" rows="2" placeholder="add comment"></textarea>
-                    <br><br>
-                    <button type="text"> Submit comment </button>
-
-
-                </form>
-
-            </div>
-
-
-        </div>
-
-
-
-
-    </section>
-</main> -->

@@ -29,15 +29,15 @@ if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
         <form class="submit-grid-container" action="submit.php" method="post">
             <div class="submit-items title">
                 <label for="title"></label>
-                <input type="text" name="title" placeholder="Title">
+                <input type="text" name="title" placeholder="title..">
             </div>
             <div class="submit-items url">
                 <label for="url"></label>
-                <input type="url" name="url" placeholder="Url">
+                <input type="url" name="url" placeholder="url..">
             </div>
             <div class="submit-items description">
                 <label for="description"></label>
-                <textarea name="description" id="description" cols="30" rows="6" placeholder="Article description"></textarea>
+                <textarea name="description" id="description" cols="30" rows="6" placeholder="article description.."></textarea>
             </div>
             <div class="submit-items btn">
                 <button type="submit">Submit</button>

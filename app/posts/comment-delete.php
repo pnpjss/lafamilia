@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require __DIR__ . ('/../autoload.php');
 
-// fixa denna, delete imorgon
 
-if (isset($_POST['delete'])) {
+if (isset($_POST['delete-id'])) {
+    $comment = $_POST['delete-id'];
 }
