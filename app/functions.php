@@ -95,7 +95,7 @@ function commentUpdate($pdo, $commentUpdate, $commentId)
 {
     $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :commentId");
     $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
-    $statement->BindParam(':content', $commentUpdate, PDO::PARAM_INT);
+    $statement->BindParam(':content', $commentUpdate, PDO::PARAM_STR);
     $statement->execute();
 }
 

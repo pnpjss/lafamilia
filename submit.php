@@ -4,6 +4,11 @@ require __DIR__ . ('/app/autoload.php');
 require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
+if (!isset($_SESSION['user'])) {
+
+    redirect('/index.php');
+    // fixa session error?
+}
 
 if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
     $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
