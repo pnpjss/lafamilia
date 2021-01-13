@@ -3,6 +3,8 @@ require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
 
+$user = $_SESSION['user'];
+
 if (isset($_GET['post-id'])) {
     $postId = $_GET['post-id'];
 };

@@ -29,14 +29,6 @@ if (isset($_GET['id'])) {
 
 
 
-
-
-
-// gör om detta!!!
-// gör så att post är 
-
-
-
 ?>
 
 
@@ -55,49 +47,51 @@ if (isset($_GET['id'])) {
                 <p><?= $post['post_date']; ?></p>
                 <b><?= $post['username']; ?></b>
             </div>
-            <div class="comments-items">
-                <?php foreach ($userComments as $comment) : ?>
-                    <?php
-                    $count++;
-                    $commentUserId = $comment['user_id'];
-                    $postedBy = fetchPostedBy($pdo, $commentUserId); ?>
-                    <div class="avatar">
+        </div>
 
-                        <img src="<?php echo "/app/images/" . $postedBy['avatar']; ?>" height="50px" width="50px" alt="">
+
+        <div class="comments-items">
+            <?php foreach ($userComments as $comment) : ?>
+                <?php
+                $count++;
+                $commentUserId = $comment['user_id'];
+                $postedBy = fetchPostedBy($pdo, $commentUserId); ?>
+                <div class="avatar">
+                    <img src="<?php echo "/app/images/" . $postedBy['avatar']; ?>" height="50px" width="50px" alt="">
+                </div>
+
+                <div class="comment-info">
+                    <?php echo '#' . $count; ?>
+                    <b><?php echo $postedBy['username']; ?></b>
+                    <?php echo $comment['date']; ?>
+                    <div class="comment-content">
+                        <?php echo $comment['content']; ?>
                     </div>
 
-                    <div class="comment-info">
-                        <?php echo '#' . $count; ?>
-                        <b><?php echo $postedBy['username']; ?></b>
-                        <?php echo $comment['date']; ?>
-                        <div class="comment-content">
-                            <?php echo $comment['content']; ?>
-                        </div>
+                </div>
+                <div class="comment-edit">
+                    <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
+                        <a href="<?= '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId . '&&user=' . $_SESSION['user']['username']; ?>">edit</a>
+                    <?php endif; ?>
+                </div>
 
-                    </div>
-                    <div class="comment-edit">
-                        <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
-                            <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">edit</a>
-                            <!-- <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a> -->
-                        <?php endif; ?>
-                    </div>
+                <span class="comment-span"></span>
+            <?php endforeach; ?>
 
-            </div>
-            <span class="comment-span"></span>
-        <?php endforeach; ?>
+        </div>
+
         <div class="add-comment">
             <form action="comments.php?id=<?= $postId; ?>" method="post">
 
                 <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="200"></textarea>
-
+                <span class="comment-span"></span>
                 <button type="text"> Submit comment </button>
 
 
             </form>
 
         </div>
-        </div>
-        </div>
+
 
 
     </section>

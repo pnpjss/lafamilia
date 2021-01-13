@@ -11,10 +11,16 @@ require __DIR__ . ('/app/views/footer.php');
 
 // Fetch all posts from database and sort by date
 
-$statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
+// $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
 
-$posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+// $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+if (isset($_GET['top-posts'])) {
+    $posts = fetchMostLiked($pdo);
+} else {
+    $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+}
 // Set logged in users id
 
 $userId = $_SESSION['user']['id'];
@@ -50,14 +56,14 @@ $userId = $_SESSION['user']['id'];
 
                     <?php if (isset($likeCheck)) : ?>
 
-                        <form action="/app/posts/comment-dislike.php" method="post">
+                        <form action="/app/posts/dislike.php" method="post">
                             <label for="dislike"></label>
                             <input type="hidden" name="dislike" id="post_id" value="<?= $post['id']; ?>">
                             <button type="submit"><img src="/app/images/dislike.png" height="15px" width="15px" alt=""></button>
                         </form>
 
                     <?php elseif (!$likeCheck) : ?>
-                        <form action="/app/posts/comment-like.php" method="post">
+                        <form action="/app/posts/like.php" method="post">
                             <label for="like"></label>
                             <input type="hidden" name="like" id="post_id" value="<?= $post['id'] ?>">
                             <button type="submit"><img src="/app/images/likes.png" height=15px width="15px" alt=""></button>

@@ -24,3 +24,4 @@ $pdo = new PDO($config['database_path']);
 
 
 // this one is supposed to be in functions.php ??
+$avatar = $_SESSION['user']['avatar'];
