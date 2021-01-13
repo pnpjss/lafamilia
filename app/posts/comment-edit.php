@@ -32,8 +32,8 @@ if (isset($_POST['comment'])) {
 
         </form>
 
-        <form action="<?= 'comment-delete.php?delete-id=' . $comment['id']; ?>" method="post">
-            <input type="hidden">
+        <form action="<?= 'comment-edit.php?delete-id=' . $comment['id']; ?>" method="post">
+            <input type="submit">
             <button type="submit">Delete comment</button>
         </form>
 

@@ -78,22 +78,25 @@ if (isset($_GET['id'])) {
                     <div class="comment-edit">
                         <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
                             <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">edit</a>
+                            <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a>
                         <?php endif; ?>
                     </div>
-                    <span class="comment-span"></span>
-                <?php endforeach; ?>
-                <div class="add-comment">
-                    <form action="comments.php?id=<?= $postId; ?>" method="post">
 
-                        <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="200"></textarea>
-
-                        <button type="text"> Submit comment </button>
-
-
-                    </form>
-
-                </div>
             </div>
+            <span class="comment-span"></span>
+        <?php endforeach; ?>
+        <div class="add-comment">
+            <form action="comments.php?id=<?= $postId; ?>" method="post">
+
+                <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="200"></textarea>
+
+                <button type="text"> Submit comment </button>
+
+
+            </form>
+
+        </div>
+        </div>
         </div>
 
 
