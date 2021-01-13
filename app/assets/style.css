@@ -1,12 +1,4 @@
 
-@font-face {
-    font-family: "Teko-Regular";
-    src: url("../fonts/Teko-Regular.woff") format("woff"), 
-      url("../fonts/Teko-Regular.woff2") format("woff2"); 
-    font-weight: normal;
-    font-style: normal;
-  }
-
 *{
     box-sizing: border-box;
     margin: 0;
