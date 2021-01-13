@@ -33,6 +33,8 @@ if (isset($_GET['signup'])) {
     if ($signupError === 'password') {
         $errorMessage = 'incorrect password';
     }
+} else {
+    $errorMessage = null;
 }
 
 

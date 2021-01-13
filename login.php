@@ -16,6 +16,9 @@ if (isset($_GET['login'])) {
     if ($error === 'comment') {
         $errorMessage = 'Login to comment on a post';
     }
+    if ($error === 'password') {
+        $errorMessage = 'Wrong password';
+    }
 } else {
     $errorMessage = null;
 }
