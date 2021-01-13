@@ -19,7 +19,7 @@ $posts = getUserPosts($pdo, $userId);
                 <!-- Add key to session  -->
                 <?php $_SESSION['user']['deletekey'] = $randomKey; ?>
                 <?php $postId = $post['id']; ?>
-                <?php $likeCount = fetchLikes($pdo, $postId); ?>
+                <?php $likeCount = getLikes($pdo, $postId); ?>
                 <?php $likeCheck = likeCheck($pdo, $postId, $userId); ?>
                 <div class="index-title">
                     <h4> <?= $post['title']; ?> </h4>

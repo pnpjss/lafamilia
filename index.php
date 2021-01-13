@@ -7,7 +7,6 @@ require __DIR__ . ('/app/autoload.php');
 
 require __DIR__ . ('/app/views/nav.php');
 
-require __DIR__ . ('/app/views/footer.php'); // ?c
 
 
 if (isset($_GET['top-posts'])) {
@@ -16,9 +15,10 @@ if (isset($_GET['top-posts'])) {
     $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 }
-
-$userId = $_SESSION['user']['id'];
-// FRÅGA VINCENT OM DENNA!
+$userId;
+if (isset($_SESSION['user'])) {
+    $userId = $_SESSION['user']['id'];
+}
 
 ?>
 
@@ -29,8 +29,10 @@ $userId = $_SESSION['user']['id'];
             <?php foreach ($posts as $post) : ?>
 
                 <?php $postId = $post['id']; ?>
-                <?php $likeCount = fetchLikes($pdo, $postId); ?>
-                <?php $likeCheck = likeCheck($pdo, $postId, $userId); ?>
+                <?php $likeCount = getLikes($pdo, $postId); ?>
+                <?php if (isset($userId)) : ?>
+                    <?php $likeCheck = likeCheck($pdo, $postId, $userId); ?>
+                <?php endif; ?>
                 <div class="index-title">
                     <h4> <?= $post['title']; ?> </h4>
                 </div>
@@ -47,24 +49,26 @@ $userId = $_SESSION['user']['id'];
 
                 <div class="index-poster-likes">
 
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <?php if (isset($likeCheck)) : ?>
 
-                    <?php if (isset($likeCheck)) : ?>
+                            <form action="/app/posts/dislike.php" method="post">
+                                <label for="dislike"></label>
+                                <input type="hidden" name="dislike" id="post_id" value="<?= $post['id']; ?>">
+                                <button type="submit"><img src="/app/images/dislike.png" height="15px" width="15px" alt=""></button>
+                            </form>
 
-                        <form action="/app/posts/dislike.php" method="post">
-                            <label for="dislike"></label>
-                            <input type="hidden" name="dislike" id="post_id" value="<?= $post['id']; ?>">
-                            <button type="submit"><img src="/app/images/dislike.png" height="15px" width="15px" alt=""></button>
-                        </form>
+                        <?php elseif (!$likeCheck) : ?>
+                            <form action="/app/posts/like.php" method="post">
+                                <label for="like"></label>
+                                <input type="hidden" name="like" id="post_id" value="<?= $post['id'] ?>">
+                                <button type="submit"><img src="/app/images/likes.png" height=15px width="15px" alt=""></button>
 
-                    <?php elseif (!$likeCheck) : ?>
-                        <form action="/app/posts/like.php" method="post">
-                            <label for="like"></label>
-                            <input type="hidden" name="like" id="post_id" value="<?= $post['id'] ?>">
-                            <button type="submit"><img src="/app/images/likes.png" height=15px width="15px" alt=""></button>
+                            </form>
 
-                        </form>
-
+                        <?php endif; ?>
                     <?php endif; ?>
+
                     <?= $likeCount['COUNT(*)'] . ' likes ' ?>
 
                 </div>

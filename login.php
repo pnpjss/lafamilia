@@ -16,7 +16,9 @@ if (isset($_GET['login'])) {
     if ($error === 'comment') {
         $errorMessage = 'Login to comment on a post';
     }
-};
+} else {
+    $errorMessage = null;
+}
 
 
 ?>

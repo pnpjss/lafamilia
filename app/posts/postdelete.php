@@ -6,10 +6,7 @@ require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
 
-
 $userId = $_SESSION['user']['id'];
-
-
 
 if (isset($_GET['postid'], $_GET['deletekey'])) {
     // Check if session key and superglobal GET key match

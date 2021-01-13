@@ -8,8 +8,6 @@ $userId = $_SESSION['user']['id'];
 $postId = $_GET['id'];
 $count = 0;
 
-
-
 if (isset($_POST['comment'])) {
     $content = filter_var($_POST['comment'], FILTER_SANITIZE_STRING);
     addComment($pdo, $content, $postId);
@@ -25,9 +23,6 @@ if (isset($_GET['id'])) {
     // fetch the comments for the specific post.
 
 }
-
-
-
 
 ?>
 
@@ -53,9 +48,10 @@ if (isset($_GET['id'])) {
         <div class="comments-items">
             <?php foreach ($userComments as $comment) : ?>
                 <?php
+
                 $count++;
                 $commentUserId = $comment['user_id'];
-                $postedBy = fetchPostedBy($pdo, $commentUserId); ?>
+                $postedBy = getPostAuthor($pdo, $commentUserId); ?>
                 <div class="avatar">
                     <img src="<?php echo "/app/images/" . $postedBy['avatar']; ?>" height="50px" width="50px" alt="">
                 </div>

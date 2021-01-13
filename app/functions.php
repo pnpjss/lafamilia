@@ -103,7 +103,7 @@ function commentUpdate($pdo, $commentUpdate, $commentId, $postId)
     exit(redirect('/comments.php?id=' . $postId));
 }
 
-function fetchPostedBy($pdo, $commentUserId)
+function getPostAuthor($pdo, $commentUserId)
 {
     $statement = $pdo->prepare("SELECT username, avatar from users where id = :commentUserId");
     $statement->BindParam(':commentUserId', $commentUserId, PDO::PARAM_INT);
@@ -212,7 +212,7 @@ function deleteLike($pdo, $postId,  $userId)
 
 
 
-function fetchLikes($pdo, $postId)
+function getLikes($pdo, $postId)
 {
     $query = "SELECT COUNT(*) FROM upvotes WHERE post_id = :post_id";
     $statement = $pdo->prepare($query);
