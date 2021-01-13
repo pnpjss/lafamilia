@@ -14,7 +14,7 @@ if ($_SESSION['user'] === $user) {
 
 if (isset($_GET['post-id'])) {
     $postId = $_GET['post-id'];
-    $post = fetchPost($pdo, $postId);
+    $post = getPost($pdo, $postId);
 };
 if (isset($_GET['comment-id'])) {
     $commentId = $_GET['comment-id'];

@@ -8,7 +8,7 @@ if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user']['id'];
 }
 
-if (isset($_GET['postid'], $_GET['updatekey'])) {
+if (isset($_GET['commentid'], $_GET['updatekey'])) {
     $editKey = $_GET['updatekey'];
 
     if ($editKey === $_SESSION['user']['updatekey']) {
@@ -25,7 +25,7 @@ if (isset($_GET['postid'], $_GET['updatekey'])) {
 <main>
     <section>
 
-        <form class="update-form" action="/app/posts/postedit.php?postid=<?= $postId ?>" method="post">
+        <form class="update-form-user" action="/app/posts/postedit.php?postid=<?= $postId ?>" method="post">
             <label for="title"></label>
             <input type="text" name="title" id="title" placeholder="<?= $post['title'] ?>">
             <label for="url"></label>

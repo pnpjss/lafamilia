@@ -20,7 +20,7 @@ if (isset($_POST['comment'])) {
 }
 
 if (isset($_GET['id'])) {
-    $post = fetchPost($pdo, $postId);
+    $post = getPost($pdo, $postId);
     // fetch the post from the superglobal $_GET['id']
     $userComments = fetchComments($pdo, $postId);
     // fetch the comments for the specific post.

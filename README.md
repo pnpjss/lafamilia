@@ -8,7 +8,7 @@
 
 - [x] As a user I should be able to logout.
 
-- [] As a user I should be able to edit my account email, password and biography.
+- [x] As a user I should be able to edit my account email, password and biography.
 
 - [x] As a user I should be able to upload a profile avatar image.
 
@@ -34,4 +34,4 @@
 
 ## Extra
 
-- [x] As a user I'm able to delete my account along with all posts, upvotes and comments.
+- [] As a user I'm able to delete my account along with all posts, upvotes and comments.

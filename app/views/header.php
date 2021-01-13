@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/app/assets/submit.css">
     <link rel="stylesheet" href="/app/assets/register.css">
     <link rel="stylesheet" href="/app/assets/nav.css">
+    <link rel="stylesheet" href="/app/assets/update.css">
     <title>Document</title>
 </head>
 

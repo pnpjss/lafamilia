@@ -359,3 +359,13 @@ function updatePassword($pdo, $oldPwd, $newPwd, $userId)
         redirect('/settings.php?error=password');
     }
 }
+
+
+function updatePost($pdo, $title, $url, $description, $postId)
+{
+    $statement = $pdo->prepare("UPDATE posts SET title = :title, url = :url, description = :description WHERE id = :id");
+    $statement->bindParam(':title', $title, PDO::PARAM_STR);
+    $statement->bindParam(':url', $url, PDO::PARAM_STR);
+    $statement->bindParam(':description', $description, PDO::PARAM_STR);
+    $statement->execute();
+}

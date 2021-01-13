@@ -42,16 +42,31 @@ $_SESSION['user']['updatekey'] = $randomKey;
                     <!-- Include key  -->
                     <a href="<?= "/app/posts/postdelete.php?postid=" . $post['id'] . '&&updatekey=' .  "$randomKey"; ?>"> delete</a>
                 </div>
+                <div class="index-poster-likes">
 
-                <?php if (isset($_GET['edit-id'])) : ?>
-                    <div class="post-edit">
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <?php if (isset($likeCheck)) : ?>
 
+                            <form action="/app/posts/dislike.php" method="post">
+                                <label for="dislike"></label>
+                                <input type="hidden" name="dislike" id="post_id" value="<?= $post['id']; ?>">
+                                <button type="submit"><img src="/app/images/dislike.png" height="15px" width="15px" alt=""></button>
+                            </form>
 
-                    </div>
+                        <?php elseif (!$likeCheck) : ?>
+                            <form action="/app/posts/like.php" method="post">
+                                <label for="like"></label>
+                                <input type="hidden" name="like" id="post_id" value="<?= $post['id'] ?>">
+                                <button type="submit"><img src="/app/images/likes.png" height=15px width="15px" alt=""></button>
 
-                <?php endif; ?>
+                            </form>
 
+                        <?php endif; ?>
+                    <?php endif; ?>
 
+                    <?= $likeCount['COUNT(*)'] . ' likes ' ?>
+
+                </div>
             <?php endforeach; ?>
         </article>
     </section>
