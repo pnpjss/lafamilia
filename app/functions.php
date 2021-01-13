@@ -222,7 +222,7 @@ function fetchLikes($pdo, $postId)
     $likeCount = $statement->fetch(PDO::FETCH_ASSOC);
     return $likeCount;
 }
-function checkIfUserIdLikedPost($pdo, $likePostId, $userId)
+function likeCheck($pdo, $likePostId, $userId)
 {
     $query = "SELECT COUNT(*) FROM upvotes WHERE post_id = :post_id AND user_id = :user_id";
     $statement = $pdo->prepare($query);
@@ -237,7 +237,7 @@ function checkIfUserIdLikedPost($pdo, $likePostId, $userId)
     }
 }
 
-function fetchMostLiked($pdo)
+function getMostLiked($pdo)
 {
     // saknar ju username här det suger lite
     $query = "SELECT COUNT(upvotes.post_id) AS votes, posts.*, users.username FROM upvotes
@@ -271,7 +271,7 @@ function updateAvatar($pdo, $image, $userId)
 
     $imageName = $image['name'];
     $imageTempName = $image['tmp_name'];
-    $imageType = $image['type'];
+
     $imageSize = $image['size'];
 
     $imageExt = explode('.', $imageName);

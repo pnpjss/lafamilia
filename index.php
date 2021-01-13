@@ -7,21 +7,15 @@ require __DIR__ . ('/app/autoload.php');
 
 require __DIR__ . ('/app/views/nav.php');
 
-require __DIR__ . ('/app/views/footer.php');
+require __DIR__ . ('/app/views/footer.php'); // ?c
 
-// Fetch all posts from database and sort by date
-
-// $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
-
-// $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 if (isset($_GET['top-posts'])) {
-    $posts = fetchMostLiked($pdo);
+    $posts = getMostLiked($pdo);
 } else {
     $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 }
-// Set logged in users id
 
 $userId = $_SESSION['user']['id'];
 // FRÅGA VINCENT OM DENNA!
@@ -36,7 +30,7 @@ $userId = $_SESSION['user']['id'];
 
                 <?php $postId = $post['id']; ?>
                 <?php $likeCount = fetchLikes($pdo, $postId); ?>
-                <?php $likeCheck = checkIfUserIdLikedPost($pdo, $postId, $userId); ?>
+                <?php $likeCheck = likeCheck($pdo, $postId, $userId); ?>
                 <div class="index-title">
                     <h4> <?= $post['title']; ?> </h4>
                 </div>

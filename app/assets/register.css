@@ -1,0 +1,29 @@
+.register-form-container{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  
+    grid-template-rows: repeat(7, auto);
+    width: 80%;
+    height: 450px;
+    background-color: rgb(214, 214, 214);
+
+}
+.register-form-item {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.register-form-item b {
+    
+    font-size: 14px;
+    color :#131313;
+}
+.register-form-item button {
+
+border:1px solid #131313;
+height :2.5rem;
+width: 8rem;
+background-color: rgba(0, 0, 255, 0);
+color:#131313;
+}

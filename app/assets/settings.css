@@ -5,10 +5,11 @@
     padding:1rem;
     grid-template-columns: 33% 66%;
     grid-template-rows:repeat(6, auto) ;
-    border:1px solid coral;
+    background-color: rgb(221, 221, 221);
     font-size: 12px;
     grid-column-gap: 0.5rem;
     grid-row-gap: 1rem;
+    color: #131313;
 }
 
 .settings-info .var-left a{

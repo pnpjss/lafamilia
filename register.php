@@ -21,57 +21,66 @@ if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['last
     $addUser = addUser($pdo, $username, $email, $pwd, $firstName, $lastName);
 }
 
+
+if (isset($_GET['signup'])) {
+    $signupError = $_GET['signup'];
+    if ($signupError === 'username') {
+        $errorMessage = 'username is already in use';
+    }
+    if ($signupError === 'email') {
+        $errorMessage = 'email is already in use';
+    }
+    if ($signupError === 'password') {
+        $errorMessage = 'incorrect password';
+    }
+}
+
+
+
+
+
+
 ?>
 
 <main>
     <section>
-
-        <form action="register.php" method="post">
-
-            <label for="username">username</label>
-            <input type="text" name="username" id="username" required>
-
-            <label for="email">email</label>
-            <input type="text" name="email" id="email" required>
-
-            <label for="firstname">firstname</label>
-            <input type="text" name="firstname" id="firstname">
-
-            <label for="lastname">lastname</label>
-            <input type="text" name="lastname" id="lastname">
-
-            <label for="pwd">password</label>
-            <input type="password" name="pwd" id="pwd" required>
-
-            <label for="pwdconfirm">password</label>
-            <input type="password" name="pwdconfirm" id="pwdconfirm" required>
-
-            <button type="submit">save</button>
-
+        <form class="register-form-container" action="register.php" method="post">
+            <div class="register-form-item top">
+                <h2>hacker news register form for you to fill out you know</h2>
+            </div>
+            <div class="register-form-item username">
+                <label for="username"></label>
+                <input type="text" name="username" id="username" placeholder="username.." required>
+            </div>
+            <div class="register-form-item username">
+                <label for="email"></label>
+                <input type="text" name="email" id="email" placeholder="email.." required>
+            </div>
+            <div class="register-form-item username">
+                <label for="firstname"></label>
+                <input type="text" name="firstname" id="firstname" placeholder="first name..">
+            </div>
+            <div class="register-form-item username">
+                <label for="lastname"></label>
+                <input type="text" name="lastname" id="lastname" placeholder="last name..">
+            </div>
+            <div class="register-form-item username">
+                <label for="pwd"></label>
+                <input type="password" name="pwd" id="pwd" placeholder="password.." required>
+            </div>
+            <div class="register-form-item username">
+                <label for="pwdconfirm"></label>
+                <input type="password" name="pwdconfirm" id="pwdconfirm" placeholder="confirm password.." required>
+            </div>
+            <div class="register-form-item username">
+                <button type="submit">save</button>
+            </div>
+            <div class="register-form-item error">
+                <b><?= $errorMessage ?></b>
+            </div>
         </form>
-        <?php
 
-        if (!isset($_GET['signup'])) {
-            exit();
-        } else {
-            $registerCheck = $_GET['signup'];
-            if ($registerCheck == 'username') {
-                echo 'this username is already taken:/';
-            }
-            if ($registerCheck == 'password') {
-                echo 'password didnt match';
-            }
-            if ($registerCheck == 'email') {
-                echo 'email is already taken';
-            }
-            if ($registerCheck == 'succes') {
-                echo 'User created'; ?>
-                <a href="<?php echo '/login.php' ?>">login</a>
-        <?php
-            }
-        }
 
-        ?>
     </section>
 </main>
 

@@ -6,6 +6,7 @@ require __DIR__ . ('/app/views/nav.php');
 
 if (isset($_GET['login'])) {
     $error = $_GET['login'];
+
     if ($error === 'username') {
         $errorMessage = 'Username was not found';
     }
@@ -14,8 +15,6 @@ if (isset($_GET['login'])) {
     }
     if ($error === 'comment') {
         $errorMessage = 'Login to comment on a post';
-    } else {
-        $errorMessage = null;
     }
 };
 
@@ -31,7 +30,7 @@ if (isset($_GET['login'])) {
             <div class="login-item"> <button type="submit" class="loginbtn">Login</button> </div>
             <div class="login-item-register"> <a href="register.php">register</a> </div>
             <div class="login-item-error">
-                <p> <?php echo $errorMessage; ?></p>
+                <b> <?= $errorMessage; ?></b>
             </div>
         </form>
         </div>

@@ -47,10 +47,14 @@ background-color: rgba(0, 0, 255, 0);
 color:#131313;
 }
 
-.loginbtn:focus{outline:none}
+.loginbtn:focus{
+    outline:none
+}
 
-.login-item-error {
-    height: 50%;
+.login-item-error b {
+    
+    font-size: 14px;
+    color :#131313;
 }
 
 
