@@ -78,7 +78,7 @@ if (isset($_GET['id'])) {
                     <div class="comment-edit">
                         <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
                             <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">edit</a>
-                            <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a>
+                            <!-- <a href="<?php echo '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a> -->
                         <?php endif; ?>
                     </div>
 
