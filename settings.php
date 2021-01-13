@@ -37,7 +37,7 @@ if (isset($_FILES['avatar'])) {
 
             </div>
             <div class="settings-item var-left">
-                <div> <a href="/../../user-posts.php">my posts</a></div>
+                <div> <a href="/../../posts.php">my posts</a></div>
                 <div> <a href="/app/users/delete-user.php"> delete user </a></div>
             </div>
             <div class="settings-item avatar">

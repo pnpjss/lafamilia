@@ -1,6 +1,6 @@
 <nav>
     <ul>
-        <li><a href="/../../index.php?latest"> la familia</a></li>
+        <li><a href="/../../index.php?latest">home</a></li>
 
         <li><a href="/../../index.php?top-posts">top posts</a></li>
 

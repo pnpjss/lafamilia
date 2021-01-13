@@ -3,7 +3,14 @@ require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
 
+if (!$_SESSION['user']) {
+    exit(redirect('/../../index.php'));
+}
+
 $user = $_SESSION['user'];
+if ($_SESSION['user'] === $user) {
+    die(var_dump('no session'));
+}
 
 if (isset($_GET['post-id'])) {
     $postId = $_GET['post-id'];

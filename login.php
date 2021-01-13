@@ -31,6 +31,7 @@ if (isset($_GET['login'])) {
             <div class="login-item-register"> <a href="register.php">register</a> </div>
             <div class="login-item-error">
                 <b> <?= $errorMessage; ?></b>
+
             </div>
         </form>
         </div>

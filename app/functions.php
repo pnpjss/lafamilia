@@ -290,3 +290,32 @@ function updateAvatar($pdo, $image, $userId)
     }
     exit(redirect('/../settings.php'));
 };
+
+
+function getUserPosts($pdo, $userId)
+{
+    $statement = $pdo->prepare("SELECT * FROM posts WHERE user_id = :user_id");
+    $statement->BindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->execute();
+    $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $posts;
+}
+
+function deletePost($pdo, $userId, $postId)
+{
+
+    $statement = $pdo->prepare("DELETE FROM posts WHERE id = :id");
+    $statement->BindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->execute();
+
+    exit(redirect('/posts.php'));
+};
+
+function getRandomKey($keyLength)
+{
+    $randomKey = '';
+    for ($i = 0; $i < $keyLength; $i++) {
+        $randomKey .= chr(mt_rand(33, 126));
+    }
+    return $randomKey;
+}
