@@ -33,5 +33,9 @@
 .settings-item .avatar-form button {
     margin-top: 1.4rem;
 }
+ .update-form {
+    display: flex;
+    height: 10rem;
+}
 
 

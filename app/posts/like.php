@@ -15,12 +15,3 @@ if (!isset($_SESSION['user'])) {
         $likePostId = addLike($pdo, $likePostId, $userId);
     }
 }
-
-
-$userId = $_SESSION['user']['id'];
-
-if (isset($_POST['like'])) {
-    $likePostId = $_POST['like'];
-
-    $likePostId = addLike($pdo, $likePostId, $userId);
-}

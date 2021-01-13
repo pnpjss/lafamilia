@@ -4,7 +4,13 @@ require __DIR__ . ('/app/autoload.php');
 require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
-$userId = $_SESSION['user']['id'];
+
+
+if (isset($_SESSION['user'])) {
+    $userId = $_SESSION['user']['id'];
+} else {
+    redirect('/login.php?login=comment');
+}
 $postId = $_GET['id'];
 $count = 0;
 
@@ -14,11 +20,8 @@ if (isset($_POST['comment'])) {
 }
 
 if (isset($_GET['id'])) {
-
-
     $post = fetchPost($pdo, $postId);
     // fetch the post from the superglobal $_GET['id']
-
     $userComments = fetchComments($pdo, $postId);
     // fetch the comments for the specific post.
 
@@ -51,23 +54,26 @@ if (isset($_GET['id'])) {
 
                 $count++;
                 $commentUserId = $comment['user_id'];
-                $postedBy = getPostAuthor($pdo, $commentUserId); ?>
+                $commentAuthor = getPostAuthor($pdo, $commentUserId); ?>
                 <div class="avatar">
-                    <img src="<?php echo "/app/images/" . $postedBy['avatar']; ?>" height="50px" width="50px" alt="">
+                    <img src="<?php echo "/app/images/" . $commentAuthor['avatar']; ?>" height="50px" width="50px" alt="">
                 </div>
 
                 <div class="comment-info">
                     <?php echo '#' . $count; ?>
-                    <b><?php echo $postedBy['username']; ?></b>
+                    <b><?php echo $commentAuthor['username']; ?></b>
                     <?php echo $comment['date']; ?>
+
+
                     <div class="comment-content">
                         <?php echo $comment['content']; ?>
                     </div>
 
+
                 </div>
                 <div class="comment-edit">
                     <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
-                        <a href="<?= '/app/posts/comment-edit.php?comment-id=' . $comment['id'] . '&&post-id=' . $postId . '&&user=' . $_SESSION['user']['username']; ?>">edit</a>
+                        <a href="<?= '/comments.php?id=' . $post['id'] ?>">edit</a>
                         <a href="<?= '/app/posts/comment-delete.php?delete-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a>
                     <?php endif; ?>
                 </div>

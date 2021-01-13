@@ -1,12 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
-
-
-
-
 
 if (isset($_POST['oldpwd'], $_POST['newpwd'], $_POST['confirmpwd'])) {
 
@@ -32,34 +30,3 @@ if (isset($_POST['oldpwd'], $_POST['newpwd'], $_POST['confirmpwd'])) {
         $message = 'Bad password';
     }
 }
-
-?>
-<style>
-    .changepassword {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 100%;
-    }
-</style>
-<main>
-    <section>
-
-
-        <form class="changepassword" action="edit-password.php" method="POST">
-            <label for="oldpwd">Old password</label>
-            <input type="password" name="oldpwd" id="oldpwd">
-            <br>
-            <label for="newpwd">New password</label>
-            <input type="password" name="newpwd" id="newpwd">
-            <br>
-            <label for="confirmpwd">Confirm password</label>
-            <input type="password" name="confirmpwd" id="confirmpwd">
-            <button type="submit">Submit</button>
-            <p><?php echo $message; ?></p>
-        </form>
-
-
-    </section>
-</main>

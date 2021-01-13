@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 require __DIR__ . ('/../autoload.php');
 require __DIR__ . ('/../views/header.php');
 require __DIR__ . ('/../views/nav.php');
@@ -20,22 +22,3 @@ if (isset($_POST['username'])) {
     session_unset();
     exit(redirect('/../../index.php'));
 }
-
-?>
-
-
-<main>
-    <section>
-        <form action="delete-user.php" method="post">
-
-            <label for="username">input username to delete account</label>
-            <input type="text" name="username">
-
-            <br>
-
-            <button type="submit"> Delete for sure. </button>
-
-
-        </form>
-    </section>
-</main>

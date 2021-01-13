@@ -64,7 +64,7 @@ function addComment($pdo, $content, $postId)
     $statement->execute();
 }
 
-function fetchPost($pdo, $postId)
+function getPost($pdo, $postId)
 {
 
     $statement = $pdo->query('SELECT posts.*, users.username FROM posts INNER JOIN users ON posts.user_id = users.id WHERE posts.id = :id');
@@ -108,8 +108,8 @@ function getPostAuthor($pdo, $commentUserId)
     $statement = $pdo->prepare("SELECT username, avatar from users where id = :commentUserId");
     $statement->BindParam(':commentUserId', $commentUserId, PDO::PARAM_INT);
     $statement->execute();
-    $postedBy = $statement->fetch(PDO::FETCH_ASSOC);
-    return $postedBy;
+    $commentAuthor = $statement->fetch(PDO::FETCH_ASSOC);
+    return $commentAuthor;
 }
 
 
@@ -174,7 +174,7 @@ function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
     $statement->bindParam(':avatar', $avatar, PDO::PARAM_STR);
     $statement->execute();
 
-    exit(redirect('register.php?signup=succes'));
+    exit(redirect('/login.php'));
 }
 
 
@@ -256,14 +256,14 @@ function getMostLiked($pdo)
 
 
 
-function changeBio($pdo, $userId, $bio)
+function updateBio($pdo, $bio, $userId,)
 {
     $statement = $pdo->prepare("UPDATE users SET biography = :bio WHERE id = :id");
     $statement->bindParam(':bio', $bio, PDO::PARAM_STR);
     $statement->bindParam(':id', $userId, PDO::PARAM_STR);
     $statement->execute();
     $_SESSION['user']['biography'] = $bio;
-    exit(redirect('/../../settings.php'));
+    exit(redirect('/../settings.php'));
 }
 
 function updateAvatar($pdo, $image, $userId)
@@ -271,9 +271,7 @@ function updateAvatar($pdo, $image, $userId)
 
     $imageName = $image['name'];
     $imageTempName = $image['tmp_name'];
-
     $imageSize = $image['size'];
-
     $imageExt = explode('.', $imageName);
     $imageActualExt = strtolower(end($imageExt));
 
@@ -311,11 +309,53 @@ function deletePost($pdo, $userId, $postId)
     exit(redirect('/posts.php'));
 };
 
-function getRandomKey($keyLength)
+function getRandomKey($keyLength = 10)
 {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
     $randomKey = '';
     for ($i = 0; $i < $keyLength; $i++) {
-        $randomKey .= chr(mt_rand(33, 126));
+        $randomKey .= $characters[rand(0, $charactersLength - 1)];
     }
     return $randomKey;
+}
+
+
+function updateEmail($pdo, $email, $newEmail, $currentEmail, $userId)
+{
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $newEmail = filter_var($_POST['new-email'], FILTER_SANITIZE_EMAIL);
+
+    if ($currentEmail !== $email) {
+        exit(redirect('settings.php?error=email'));
+    } else if ($currentEmail === $email) {
+        $query = "UPDATE users SET email = :email WHERE id = :id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
+        $statement->bindParam(':id', $userId, PDO::PARAM_STR);
+        $statement->execute();
+        redirect('settings.php?success=email');
+    }
+};
+
+
+function updatePassword($pdo, $oldPwd, $newPwd, $userId)
+{
+
+    $statement = $pdo->prepare("SELECT * FROM users WHERE id = :userId");
+    $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+    $statement->execute();
+    $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // fixa databasen
+    if (password_verify($oldPwd, $user['passwd'])) {
+        $newPwd = password_hash($newPwd, PASSWORD_DEFAULT);
+        $statement = $pdo->prepare("UPDATE users SET passwd = :newpwd WHERE id = :userId");
+        $statement->bindParam(':userId', $userId, PDO::PARAM_STR);
+        $statement->bindParam(':newpwd', $newPwd, PDO::PARAM_STR);
+        $statement->execute();
+        redirect('/settings.php?success=password');
+    } else {
+        redirect('/settings.php?error=password');
+    }
 }

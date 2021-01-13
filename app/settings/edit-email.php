@@ -11,24 +11,12 @@ if (isset($_POST['currentemail'], $_POST['newemail'])) {
     $inputnew = filter_var($_POST['newemail'], FILTER_SANITIZE_EMAIL);
 
     if ($currentEmail !== $inputold) {
-        echo 'Bad information';
+        exit(redirect('/../../settings.php?error=email'));
     } else if ($currentEmail === $inputold) {
         $query = "SELECT * FROM users where email LIKE :email";
         $statement = $pdo->prepare($query);
         $statement->bindParam(':email', $inputnew, PDO::PARAM_STR);
         $statement->execute();
+        redirect('/../../settings.php?success=email');
     }
-
-
-    // $query = "UPDATE users SET email = :email WHERE username = :username";
-
-    // $statement = $pdo->prepare($query);
-
-    // if (!$statement) {
-    //     die(var_dump($pdo->errorInfo()));
-    // }
-
-    // $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
-    // $statement->bindParam(':username', $username, PDO::PARAM_STR);
-    // $statement->execute();
 }

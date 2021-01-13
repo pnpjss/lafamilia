@@ -2,12 +2,8 @@
 //login fungera
 
 require __DIR__ . ('/app/views/header.php');
-
 require __DIR__ . ('/app/autoload.php');
-
 require __DIR__ . ('/app/views/nav.php');
-
-
 
 if (isset($_GET['top-posts'])) {
     $posts = getMostLiked($pdo);
@@ -15,7 +11,7 @@ if (isset($_GET['top-posts'])) {
     $statement = $pdo->query('SELECT posts.*, users.username FROM users INNER JOIN posts ON posts.user_id = users.id ORDER BY post_date DESC');
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
 }
-$userId;
+
 if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user']['id'];
 }
