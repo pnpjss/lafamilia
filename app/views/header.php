@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="/app/assets/settings.css">
     <link rel="stylesheet" href="/app/assets/index.css">
     <link rel="stylesheet" href="/app/assets/comments.css">
+    <link rel="stylesheet" href="/app/assets/comment-edit.css">
     <link rel="stylesheet" href="/app/assets/submit.css">
     <link rel="stylesheet" href="/app/assets/register.css">
+    <link rel="stylesheet" href="/app/assets/nav.css">
     <title>Document</title>
 </head>
 

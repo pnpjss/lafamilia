@@ -103,6 +103,7 @@
 }
 .comment-edit a {
     color: rgb(15, 15, 15);
+    padding-left: 0.4rem;
 }
 .comment-span {
     display: flex;

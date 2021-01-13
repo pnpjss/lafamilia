@@ -1,1 +1,15 @@
-.
+.comment-edit-container {
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    
+    flex-direction: column;
+}
+.comment-edit-container textarea {
+    width: 80%;
+    height: 50%;
+}
+.comment-edit-container button {
+    margin-top: 1.4rem;
+    width: 40%;
+}

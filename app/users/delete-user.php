@@ -18,6 +18,7 @@ if (isset($_POST['username'])) {
     $statement->execute();
 
     session_unset();
+    exit(redirect('/../../index.php'));
 }
 
 ?>

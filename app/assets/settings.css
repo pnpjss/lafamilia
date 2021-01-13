@@ -13,32 +13,25 @@
 }
 
 .settings-info .var-left a{
-width: 100%;
-
+    width: 100%;
 }
 .settings-item .avatar-form{
     display: flex;
-
-
     flex-wrap: wrap;
 }
+.settings-item .avatar-form input {
+    border: none;
+}
 .settings-item .avatar-form button {
-    margin-top: 3rem;
+    border:1px solid #131313;
+    height :2.5rem;
+    width: 8rem;
+    background-color: rgba(0, 0, 255, 0);
+    color:#131313;
+}
+
+.settings-item .avatar-form button {
+    margin-top: 1.4rem;
 }
 
 
-
-/* .settings-grid-container > a {
-    width: 100%;
-} */
-
-/* .grid-item3{
-    color :white;
-}
-#bio{
-    max-width: 90%;
-    max-height: 100px;
-}
-.grid-item5, .grid-item6{
-    max-height: fit-content;
-} */
