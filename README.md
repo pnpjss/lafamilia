@@ -44,6 +44,14 @@ $ php -S localhost:8000
 
 - [x] As a user I'm able to delete my comments.
 
+## Some features
+
+- Password changes will be tried against the database
+
+- Deleting user will delete all likes, posts and comments as well
+
+- During registration, password input will be confirmed
+
 ### tested by:
 
 Joakim Sjögren

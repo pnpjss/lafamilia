@@ -19,15 +19,13 @@ if (isset($_GET['commentid'], $_GET['updatekey'])) {
     }
 }
 
-
 ?>
-
 <main>
     <section>
-
         <form class="update-form-user" action="<?= '/app/posts/comment-edit.php?commentid=' . $commentId ?>" method="post">
             <textarea name="content" id="content" cols="30" rows="10"><?= $comment['content']; ?></textarea>
-            <button type="submit">Update Post</button>
+            <button name="submit-post" type="submit">Update Post</button>
         </form>
     </section>
 </main>
+<?php require __DIR__ . ('/../app/views/nav.php'); ?>

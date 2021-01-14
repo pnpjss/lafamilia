@@ -16,7 +16,6 @@ if (isset($_GET['postid'], $_GET['updatekey'])) {
         $post = getPost($pdo, $postId);
     } else {
         exit(redirect('/../../posts.php?error=getPost'));
-        // write error
     }
 }
 

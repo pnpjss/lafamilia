@@ -15,17 +15,9 @@ if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
     $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
     addPost($pdo, $title, $url, $description);
 }
-
-// gör så man måste logga in!
-
-
-
-
 ?>
-
 <main>
     <section>
-
         <form class="submit-grid-container" action="submit.php" method="post">
             <div class="submit-items title">
                 <label for="title"></label>
@@ -43,14 +35,6 @@ if (isset($_POST['title'], $_POST['url'], $_POST['description'])) {
                 <button type="submit">Submit</button>
             </div>
         </form>
-
-
-
     </section>
 </main>
-
-<!-- 
-Hur sorter vi det här? I vilken mapp? 
-Hur ska databasen se ut? Se över vad som behövs
-Denna sidan action = threads.php, där finns ingentin än så länge
-Fundera över utseende -->
+<?php require __DIR__ . ('/app/views/nav.php'); ?>

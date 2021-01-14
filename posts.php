@@ -7,6 +7,7 @@ require __DIR__ . ('/app/views/nav.php');
 if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user']['id'];
 }
+
 $posts = getUserPosts($pdo, $userId);
 
 // Create key to prohibit anyone from deleting or editing posts

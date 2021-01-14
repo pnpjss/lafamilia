@@ -6,7 +6,6 @@ require __DIR__ . ('/app/views/nav.php');
 
 if (isset($_GET['login'])) {
     $signInMessage = $_GET['login'];
-
     if ($signInMessage === 'username') {
         $message = 'Username was not found';
     }
@@ -25,7 +24,6 @@ if (isset($_GET['login'])) {
 } else {
     $message = null;
 }
-
 
 ?>
 

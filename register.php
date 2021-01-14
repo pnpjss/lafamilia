@@ -37,11 +37,6 @@ if (isset($_GET['signup'])) {
     $loginMessage = null;
 }
 
-
-
-
-
-
 ?>
 
 <main>
@@ -81,8 +76,6 @@ if (isset($_GET['signup'])) {
                 <b><?= $loginMessage ?></b>
             </div>
         </form>
-
-
     </section>
 </main>
 

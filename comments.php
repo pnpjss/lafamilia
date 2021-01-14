@@ -4,8 +4,6 @@ require __DIR__ . ('/app/autoload.php');
 require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
-
-
 if (isset($_SESSION['user'])) {
     $userId = $_SESSION['user']['id'];
 } else {
@@ -37,10 +35,8 @@ $_SESSION['user']['updatekey'] = $randomKey;
 // Not bullet proof..
 ?>
 
-
 <main>
     <section>
-
         <div class="comments-postitem">
             <div class="title">
                 <h1><?php echo $post['title']; ?></h1>
@@ -54,30 +50,23 @@ $_SESSION['user']['updatekey'] = $randomKey;
                 <b><?= $post['username']; ?></b>
             </div>
         </div>
-
-
         <div class="comments-items">
             <?php foreach ($userComments as $comment) : ?>
                 <?php
-
                 $count++;
                 $commentUserId = $comment['user_id'];
-                $commentAuthor = getPostAuthor($pdo, $commentUserId); ?>
+                $commentAuthor = getPostAuthor($pdo, $commentUserId);
+                ?>
                 <div class="avatar">
                     <img src="<?php echo "/app/images/" . $commentAuthor['avatar']; ?>" height="50px" width="50px" alt="">
                 </div>
-
                 <div class="comment-info">
                     <?php echo '#' . $count; ?>
                     <b><?php echo $commentAuthor['username']; ?></b>
                     <?php echo $comment['date']; ?>
-
-
                     <div class="comment-content">
                         <?php echo $comment['content']; ?>
                     </div>
-
-
                 </div>
                 <div class="comment-edit">
                     <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
@@ -85,25 +74,16 @@ $_SESSION['user']['updatekey'] = $randomKey;
                         <a href="<?= '/app/posts/comment-delete.php?commentid=' . $comment['id'] . '&&postid=' . $post['id'] . '&&updatekey=' . $randomKey; ?>">delete</a>
                     <?php endif; ?>
                 </div>
-
                 <span class="comment-span"></span>
             <?php endforeach; ?>
-
         </div>
-
         <div class="add-comment">
             <form action="comments.php?id=<?= $postId; ?>" method="post">
-
                 <textarea name="comment" id="comment" cols="50" rows="5" placeholder="add comment" maxheight="200" maxlength="200"></textarea>
                 <span class="comment-span"></span>
                 <button type="text"> Submit comment </button>
-
-
             </form>
-
         </div>
-
-
-
     </section>
 </main>
+<?php require __DIR__ . ('/app/views/nav.php'); ?>

@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 if (!function_exists('redirect')) {
     function redirect(string $path)
     {
@@ -10,7 +9,6 @@ if (!function_exists('redirect')) {
         exit;
     }
 };
-
 
 function getPosts($pdo, $posts)
 {
@@ -242,9 +240,6 @@ function getMostLiked($pdo)
     return $posts;
 };
 
-
-
-
 function updateBio($pdo, $bio, $userId,)
 {
     $statement = $pdo->prepare("UPDATE users SET biography = :bio WHERE id = :id");
@@ -328,7 +323,6 @@ function updateEmail($pdo, $email, $newEmail, $currentEmail, $userId)
     }
 };
 
-
 function updatePassword($pdo, $oldPwd, $newPwd, $userId)
 {
 
@@ -349,7 +343,6 @@ function updatePassword($pdo, $oldPwd, $newPwd, $userId)
         redirect('/settings.php?error=password');
     }
 }
-
 
 function updatePost($pdo, $title, $url, $description, $postId)
 {

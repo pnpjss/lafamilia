@@ -11,7 +11,6 @@ if (isset($_GET['commentid'],  $_GET['updatekey'], $_GET['postid'])) {
     if ($updateKey === $_SESSION['user']['updatekey']) {
         $query = "DELETE FROM comments WHERE id = :id";
         $statement = $pdo->prepare($query);
-
         if (!$statement) {
             die(var_dump($pdo->errorInfo()));
         }
