@@ -1,8 +1,6 @@
 
-
 .index-container{
 display: flex;
-
 width: 90%;
 height:auto;
 flex-wrap: wrap;
@@ -12,10 +10,7 @@ border-top: none;
 padding: 0.4rem ;
 padding-bottom: 2.5rem;
 }
-/* .index-container > * {
-    height: auto;
-    overflow: hidden;
-} */
+
 .index-title {
     height : auto;
     width: 100%;
@@ -61,8 +56,6 @@ padding-bottom: 2.5rem;
     background-color: rgb(221, 221, 221);
     border: none;
     border-bottom: solid 1px chocolate;
-    
-    
 }
 .index-poster-likes button {
     border: none;

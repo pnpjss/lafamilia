@@ -41,15 +41,8 @@ section {
     justify-content: center;
     width: 100% ;
     max-width: 800px;
-    min-height:100% ; /* minus pga navbar*/
+    min-height:100% ; 
     margin-top: 50px;
     background-color: rgb(231, 231, 231);
     flex-wrap: wrap;
 }
-/* button {
-    border:1px solid #131313;
-height :2.5rem;
-width: 8rem;
-background-color: rgba(0, 0, 255, 0);
-color:#131313;
-} */

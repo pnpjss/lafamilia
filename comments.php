@@ -24,8 +24,7 @@ if (isset($_GET['id'])) {
     // fetch the comments for the specific post.
 
 }
-// Create key to prohibit anyone from deleting or editing posts
-// Should probably use forms with method=post instead
+
 // Set key length
 $keyLength = 15;
 // Generate and return key

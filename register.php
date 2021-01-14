@@ -42,9 +42,7 @@ if (isset($_GET['signup'])) {
 <main>
     <section>
         <form class="register-form-container" action="register.php" method="post">
-            <div class="register-form-item top">
-                <h2>hacker news register form for you to fill out you know</h2>
-            </div>
+
             <div class="register-form-item username">
                 <label for="username"></label>
                 <input type="text" name="username" id="username" placeholder="username.." required>

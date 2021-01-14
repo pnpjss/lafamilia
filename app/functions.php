@@ -36,11 +36,7 @@ function addPost($pdo, $title, $url, $description)
     $statement->bindParam(':post_date', $postDate, PDO::PARAM_STR);
     $statement->execute();
 
-
-    // fetcha post ID!!
     exit(redirect('/../index.php'));
-
-    // msg
 }
 
 function addComment($pdo, $content, $postId)
@@ -99,14 +95,6 @@ function getPostAuthor($pdo, $commentUserId)
     return $commentAuthor;
 }
 
-
-
-
-
-
-//  REGISTER USER
-// String to lower?
-
 function checkUsername($pdo, $username)
 {
     $statement = $pdo->prepare("SELECT username FROM users WHERE username = :username");
@@ -164,11 +152,6 @@ function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
     exit(redirect('/login.php?login=new-user'));
 }
 
-
-// funktion som ser att allt är satt
-//byt till checkVarExists ?
-
-
 function addLike($pdo,  $postId, $userId)
 {
 
@@ -195,9 +178,6 @@ function deleteLike($pdo, $postId,  $userId)
 
     exit(redirect('/../index.php'));
 }
-
-
-
 
 function getLikes($pdo, $postId)
 {
@@ -226,7 +206,6 @@ function likeCheck($pdo, $likePostId, $userId)
 
 function getMostLiked($pdo)
 {
-    // saknar ju username här det suger lite
     $query = "SELECT COUNT(upvotes.post_id) AS votes, posts.*, users.username FROM upvotes
     INNER JOIN posts
     ON posts.id = upvotes.post_id
@@ -331,7 +310,6 @@ function updatePassword($pdo, $oldPwd, $newPwd, $userId)
     $statement->execute();
     $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-    // fixa databasen
     if (password_verify($oldPwd, $user['passwd'])) {
         $newPwd = password_hash($newPwd, PASSWORD_DEFAULT);
         $statement = $pdo->prepare("UPDATE users SET passwd = :newpwd WHERE id = :userId");

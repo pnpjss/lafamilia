@@ -11,11 +11,14 @@
         <?php endif; ?>
 
         <?php if (!isset($_SESSION['user'])) : ?>
-            <li><a href="/../../login.php"> Login</a></li>
+            <li><a href="/../../login.php"> login</a></li>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['user'])) : ?>
             <li><a href="<?= '/../../settings.php?user=' . $_SESSION['user']['username'];  ?>"><?= $_SESSION['user']['username'] ?></a></li>
+        <?php endif; ?>
+        <?php if (isset($_SESSION['user'])) : ?>
+            <li><img src="<?= '/app/images/' . $_SESSION['user']['avatar'] ?>" width="35px" height="35px" alt=""></li>
         <?php endif; ?>
 
     </ul>

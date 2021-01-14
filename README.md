@@ -52,10 +52,56 @@ $ php -S localhost:8000
 
 - During registration, password input will be confirmed
 
+- Images will be stored with unique id's to ensure their names dont interfere
+
+- Registration tests availability for email and username against the database
+
 ### tested by:
 
 Joakim Sjögren
 
 Ida From
 
-### code review:
+### code review by Erik White:
+
+- Consider removing commented CSS code before handing in. 'style.css' for an example.
+
+- Bio-container in mobile views goes a bit out off-screen.
+
+- You might want to format your code for better readability. Index.php @ line 27- for an example.
+
+- In that same place you could save yourself some typing by placeing PHP-code within the same opening -and closing tags.
+
+- Thumbs up when downvoting, and thumbs down when upvoting. I recall you mentioning this, but for the sake of documentation, haha.
+
+- Good job with function to delete account. Didn't manage this myself in time. Consider using some sort of messege.confirm to confirm this descision,
+  so the user don't accidently delete his or her account.
+
+- Cool use of getRandomKey (posts.php @ line 17). Never thought of this before. In the end, I'm not sure what would be the most secure option. One way I went for was to
+  check is us userId matches with the content.
+
+- You might want to include images folder in the .gitignore to to not clutter you repo with images.
+
+- Good use with /.vscode/ json settings -and extensions. Something I forgot all about.
+
+- In the index.php you a PDO query that might be better off in the functions.php. But that's just my preference.
+
+- Over all, very good job! You solved it well without confusing yourself with tons of JS like I did.
+
+### Backlog
+
+- Code cleanup
+
+- Main/section in html and css
+
+- Adding comments in code
+
+- Messages on page actions
+
+- Css cleanup
+
+- Footer
+
+- Filter corrections
+
+- Function strict types and return values
