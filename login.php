@@ -5,22 +5,25 @@ require __DIR__ . ('/app/views/header.php');
 require __DIR__ . ('/app/views/nav.php');
 
 if (isset($_GET['login'])) {
-    $error = $_GET['login'];
+    $signInMessage = $_GET['login'];
 
-    if ($error === 'username') {
-        $errorMessage = 'Username was not found';
+    if ($signInMessage === 'username') {
+        $message = 'Username was not found';
     }
-    if ($error === 'submit') {
-        $errorMessage = 'Login or register to submit a new topic';
+    if ($signInMessage === 'submit') {
+        $message = 'Login or register to submit a new topic';
     }
-    if ($error === 'comment') {
-        $errorMessage = 'Login to comment on a post';
+    if ($signInMessage === 'comment') {
+        $message = 'Login to comment on a post';
     }
-    if ($error === 'password') {
-        $errorMessage = 'Wrong password';
+    if ($signInMessage === 'password') {
+        $message = 'Wrong password';
+    }
+    if ($signInMessage === 'new-user') {
+        $message = 'login to get started';
     }
 } else {
-    $errorMessage = null;
+    $message = null;
 }
 
 
@@ -34,8 +37,8 @@ if (isset($_GET['login'])) {
             <div class="login-item-password"> <label for="pwd"></label><input type="password" name="pwd" id="pwd" placeholder="password"> </div>
             <div class="login-item"> <button type="submit" class="loginbtn">Login</button> </div>
             <div class="login-item-register"> <a href="register.php">register</a> </div>
-            <div class="login-item-error">
-                <b> <?= $errorMessage; ?></b>
+            <div class="login-item-signInMessage">
+                <b> <?= $message; ?></b>
 
             </div>
         </form>

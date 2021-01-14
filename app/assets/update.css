@@ -2,7 +2,8 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    height: 400px;
-    min-width: 80%;
-    grid-template-rows: repeat(5fr, 5rem);
+    height: 450px;
+    width: 400px;
+    grid-template-rows: repeat(5fr, auto);
 }
+

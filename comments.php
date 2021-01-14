@@ -26,7 +26,15 @@ if (isset($_GET['id'])) {
     // fetch the comments for the specific post.
 
 }
-
+// Create key to prohibit anyone from deleting or editing posts
+// Should probably use forms with method=post instead
+// Set key length
+$keyLength = 15;
+// Generate and return key
+$randomKey = getRandomKey($keyLength);
+// Store key in session array
+$_SESSION['user']['updatekey'] = $randomKey;
+// Not bullet proof..
 ?>
 
 
@@ -73,8 +81,8 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="comment-edit">
                     <?php if ($commentUserId === $_SESSION['user']['id']) : ?>
-                        <a href="<?= '/comments.php?id=' . $post['id'] ?>">edit</a>
-                        <a href="<?= '/app/posts/comment-delete.php?delete-id=' . $comment['id'] . '&&post-id=' . $postId ?>">delete</a>
+                        <a href="<?= '/comment-update.php?commentid=' . $comment['id'] . '&&postid=' . $postId . '&&updatekey=' . $randomKey; ?>">edit</a>
+                        <a href="<?= '/app/posts/comment-delete.php?commentid=' . $comment['id'] . '&&postid=' . $post['id'] . '&&updatekey=' . $randomKey; ?>">delete</a>
                     <?php endif; ?>
                 </div>
 

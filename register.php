@@ -23,18 +23,18 @@ if (isset($_POST['username'], $_POST['email'], $_POST['firstname'], $_POST['last
 
 
 if (isset($_GET['signup'])) {
-    $signupError = $_GET['signup'];
-    if ($signupError === 'username') {
-        $errorMessage = 'username is already in use';
+    $login = $_GET['signup'];
+    if ($login === 'username') {
+        $loginMessage = 'username is already in use';
     }
-    if ($signupError === 'email') {
-        $errorMessage = 'email is already in use';
+    if ($login === 'email') {
+        $loginMessage = 'email is already in use';
     }
-    if ($signupError === 'password') {
-        $errorMessage = 'incorrect password';
+    if ($login === 'password') {
+        $loginMessage = 'incorrect password';
     }
 } else {
-    $errorMessage = null;
+    $loginMessage = null;
 }
 
 
@@ -77,8 +77,8 @@ if (isset($_GET['signup'])) {
             <div class="register-form-item username">
                 <button type="submit">save</button>
             </div>
-            <div class="register-form-item error">
-                <b><?= $errorMessage ?></b>
+            <div class="register-form-item Message">
+                <b><?= $loginMessage ?></b>
             </div>
         </form>
 

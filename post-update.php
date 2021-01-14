@@ -25,7 +25,7 @@ if (isset($_GET['postid'], $_GET['updatekey'])) {
 <main>
     <section>
 
-        <form class="update-form" action="/app/posts/postedit.php?postid=<?= $postId ?>" method="post">
+        <form class="update-form-user" action="/app/posts/postedit.php?postid=<?= $post['id'] ?>" method="post">
             <label for="title"></label>
             <input type="text" name="title" id="title" placeholder="<?= $post['title'] ?>">
             <label for="url"></label>

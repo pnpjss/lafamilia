@@ -83,24 +83,13 @@ function fetchComments($pdo, $postId)
     return $userComments;
 }
 
-function fetchComment($pdo, $commentId)
+function getComment($pdo, $commentId)
 {
     $statement = $pdo->prepare("SELECT * FROM comments WHERE id = :id");
     $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
     $statement->execute();
     $comment = $statement->fetch(PDO::FETCH_ASSOC);
     return $comment;
-}
-function commentUpdate($pdo, $commentUpdate, $commentId, $postId)
-{
-
-
-    $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :id");
-    $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
-    $statement->BindParam(':content', $commentUpdate, PDO::PARAM_STR);
-    $statement->execute();
-
-    exit(redirect('/comments.php?id=' . $postId));
 }
 
 function getPostAuthor($pdo, $commentUserId)
@@ -174,7 +163,7 @@ function addUser($pdo, $username, $email, $pwd, $firstName, $lastName)
     $statement->bindParam(':avatar', $avatar, PDO::PARAM_STR);
     $statement->execute();
 
-    exit(redirect('/login.php'));
+    exit(redirect('/login.php?login=new-user'));
 }
 
 
@@ -299,14 +288,14 @@ function getUserPosts($pdo, $userId)
     return $posts;
 }
 
-function deletePost($pdo, $userId, $postId)
+function deletePost($pdo, $postId)
 {
 
     $statement = $pdo->prepare("DELETE FROM posts WHERE id = :id");
-    $statement->BindParam(':id', $postId, PDO::PARAM_STR);
+    $statement->BindParam(':id', $postId, PDO::PARAM_INT);
     $statement->execute();
 
-    exit(redirect('/posts.php'));
+    exit(redirect('/../posts.php'));
 };
 
 function getRandomKey($keyLength = 10)
@@ -334,6 +323,7 @@ function updateEmail($pdo, $email, $newEmail, $currentEmail, $userId)
         $statement->bindParam(':email', $newEmail, PDO::PARAM_STR);
         $statement->bindParam(':id', $userId, PDO::PARAM_STR);
         $statement->execute();
+        // $_SESSION['user']['email'] = $newEmail;
         redirect('settings.php?success=email');
     }
 };

@@ -68,7 +68,7 @@ if (isset($_POST['password'], $_POST['old-password'])) {
             <div class="settings-item update-form">
                 <form action="/settings.php" method="post">
                     <label for="email">old email</label>
-                    <input type="text" name="email" id="email" placeholder="<?= $_SESSION['user']['email']; ?>">
+                    <input type="text" name="email" id="email" placeholder="current email..">
                     <label for="new-email">new email</label>
                     <input type="text" name="new-email" id="new-email" placeholder="new email..">
                     <button type="submit">update email</button>
