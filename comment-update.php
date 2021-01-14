@@ -28,4 +28,4 @@ if (isset($_GET['commentid'], $_GET['updatekey'])) {
         </form>
     </section>
 </main>
-<?php require __DIR__ . ('/../app/views/nav.php'); ?>
+<?php require __DIR__ . ('/app/views/footer.php'); ?>
