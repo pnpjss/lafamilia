@@ -28,7 +28,6 @@ if (isset($_POST['password'], $_POST['old-password'])) {
     $oldPwd = $_POST['old-password'];
     $newPwd = updatePassword($pdo, $oldPwd, $newPwd, $userId);
 }
-
 ?>
 <main>
     <section>
