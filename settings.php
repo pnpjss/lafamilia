@@ -19,8 +19,8 @@ if (isset($_FILES['avatar'])) {
 
 if (isset($_POST['email'], $_POST['new-email'])) {
     $currentEmail = $_SESSION['user']['email'];
-    $email = $_POST['email'];
-    $newEmail = $_POST['new-email'];
+    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $newEmail = filter_var($_POST['new-email'], FILTER_SANITIZE_EMAIL);
     $email = updateEmail($pdo, $email, $newEmail, $currentEmail, $userId);
 }
 if (isset($_POST['password'], $_POST['old-password'])) {

@@ -7,7 +7,7 @@ require __DIR__ . ('/../views/nav.php');
 
 if (isset($_GET['commentid'], $_POST['content'])) {
     $commentId = $_GET['commentid'];
-    $commentContent = $_POST['content'];
+    $commentContent = filter_var($_POST['content'], FILTER_SANITIZE_STRING);
 
     $statement = $pdo->prepare("UPDATE comments SET content = :content WHERE id = :id");
     $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
