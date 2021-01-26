@@ -58,6 +58,26 @@ function addComment($pdo, $content, $postId)
     $statement->execute();
 }
 
+function addCommentReply($pdo, $comment, $parentCommentId) {
+   
+    $userId = $_SESSION['user']['id'];
+
+    
+    
+    $query = "INSERT INTO comment_replies (user_id, comment_id, content) VALUES (:user_id, :comment_id, :content)";
+    $statement = $pdo->prepare($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $statement->bindParam(':content', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':comment_id', $parentCommentId, PDO::PARAM_INT);
+    
+    $statement->execute();
+}
+
 function getPost($pdo, $postId)
 {
 
@@ -75,6 +95,15 @@ function fetchComments($pdo, $postId)
     $statement->execute();
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $userComments;
+}
+
+function fetchCommentReplies($pdo ,$commentId)
+{
+    $statement = $pdo->prepare("SELECT * FROM comment_replies WHERE comment_id = :comment_id");
+    $statement->BindParam(':comment_id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+    $commentReplies = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $commentReplies;
 }
 
 function getComment($pdo, $commentId)
@@ -316,6 +345,17 @@ function getUserPosts($pdo, $userId)
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
+
+function goToPostByCommentId($pdo, $commentId) {
+    $statement = $pdo->prepare("SELECT post_id from comments WHERE id = :id");
+    $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $post = $statement->fetch()[0];
+    
+    exit(redirect("/../../comments.php?id=$post"));
+}
+
 
 function deletePost($pdo, $postId)
 {
