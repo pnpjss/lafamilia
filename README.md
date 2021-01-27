@@ -105,3 +105,12 @@ Ida From
 - Filter corrections
 
 - Function strict types and return values
+
+## Added Features
+
+- As a user i'm able to reply to comments.
+
+- As a user i'm able to upvote and remove upvote on comments.
+
+- Link to pull request: https://github.com/pnpjss/lafamilia/pull/1
+

@@ -58,6 +58,26 @@ function addComment($pdo, $content, $postId)
     $statement->execute();
 }
 
+function addCommentReply($pdo, $comment, $parentCommentId) {
+   
+    $userId = $_SESSION['user']['id'];
+
+    
+    
+    $query = "INSERT INTO comment_replies (user_id, comment_id, content) VALUES (:user_id, :comment_id, :content)";
+    $statement = $pdo->prepare($query);
+
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_INT);
+    $statement->bindParam(':content', $comment, PDO::PARAM_STR);
+    $statement->bindParam(':comment_id', $parentCommentId, PDO::PARAM_INT);
+    
+    $statement->execute();
+}
+
 function getPost($pdo, $postId)
 {
 
@@ -75,6 +95,15 @@ function fetchComments($pdo, $postId)
     $statement->execute();
     $userComments = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $userComments;
+}
+
+function fetchCommentReplies($pdo ,$commentId)
+{
+    $statement = $pdo->prepare("SELECT * FROM comment_replies WHERE comment_id = :comment_id");
+    $statement->BindParam(':comment_id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+    $commentReplies = $statement->fetchAll(PDO::FETCH_ASSOC);
+    return $commentReplies;
 }
 
 function getComment($pdo, $commentId)
@@ -167,6 +196,34 @@ function addLike($pdo,  $postId, $userId)
     exit(redirect('/../index.php'));
 }
 
+function addLikeToComment($pdo,  $commentId, $userId, $postId)
+{
+
+    $query = "INSERT INTO comment_upvotes (user_id, comment_id) VALUES (:user_id, :comment_id)";
+    $statement = $pdo->prepare($query);
+    if (!$statement) {
+        die(var_dump($pdo->errorInfo()));
+    }
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->bindParam(':comment_id', $commentId, PDO::PARAM_STR);
+    $statement->execute();
+    
+    exit(redirect("/../comments.php?id=$postId"));
+}
+
+function deleteLikeToComment($pdo, $commentId,  $userId, $postId)
+{
+    $query = "DELETE FROM comment_upvotes WHERE user_id = :user_id AND comment_id = :comment_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->bindParam(':comment_id', $commentId, PDO::PARAM_STR);
+    $statement->execute();
+
+    exit(redirect("/../comments.php?id=$postId"));
+}
+
 function deleteLike($pdo, $postId,  $userId)
 {
     $query = "DELETE FROM upvotes WHERE user_id = :user_id AND post_id = :post_id";
@@ -189,12 +246,39 @@ function getLikes($pdo, $postId)
     $likeCount = $statement->fetch(PDO::FETCH_ASSOC);
     return $likeCount;
 }
+
+function getCommentLikes($pdo, $commentId)
+{
+    $query = "SELECT COUNT(*) FROM comment_upvotes WHERE comment_id = :comment_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':comment_id', $commentId, PDO::PARAM_STR);
+    $statement->execute();
+    $likeCount = $statement->fetch(PDO::FETCH_ASSOC);
+    return $likeCount;
+}
+
 function likeCheck($pdo, $likePostId, $userId)
 {
     $query = "SELECT COUNT(*) FROM upvotes WHERE post_id = :post_id AND user_id = :user_id";
     $statement = $pdo->prepare($query);
 
     $statement->bindParam(':post_id', $likePostId, PDO::PARAM_STR);
+    $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
+    $statement->execute();
+    $likeCheck = $statement->fetch(PDO::FETCH_ASSOC);
+    if ($likeCheck['COUNT(*)'] > 0) {
+        $likeCheck = $likeCheck['COUNT(*)'];
+        return $likeCheck;
+    }
+}
+
+function commentLikeCheck($pdo, $likeCommentId, $userId)
+{
+    $query = "SELECT COUNT(*) FROM comment_upvotes WHERE comment_id = :comment_id AND user_id = :user_id";
+    $statement = $pdo->prepare($query);
+
+    $statement->bindParam(':comment_id', $likeCommentId, PDO::PARAM_STR);
     $statement->bindParam(':user_id', $userId, PDO::PARAM_STR);
     $statement->execute();
     $likeCheck = $statement->fetch(PDO::FETCH_ASSOC);
@@ -261,6 +345,17 @@ function getUserPosts($pdo, $userId)
     $posts = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $posts;
 }
+
+function goToPostByCommentId($pdo, $commentId) {
+    $statement = $pdo->prepare("SELECT post_id from comments WHERE id = :id");
+    $statement->BindParam(':id', $commentId, PDO::PARAM_INT);
+    $statement->execute();
+
+    $post = $statement->fetch()[0];
+    
+    exit(redirect("/../../comments.php?id=$post"));
+}
+
 
 function deletePost($pdo, $postId)
 {

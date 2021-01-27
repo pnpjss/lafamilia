@@ -17,20 +17,46 @@
     height: auto;
     
     padding-left: 1rem;
-    border-bottom: 1px solid chocolate;
+   
 }
 
 .comments-postitem .description{
     width: 100%;
     height: auto;
     padding-left: 1rem;
-    border-bottom: 1px solid chocolate;
+    
 }
+
+.comment-poster-likes {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    background-color: rgb(221, 221, 221);
+    border: none;
+   
+}
+
+.comment-poster-likes button {
+    border: none;
+    background-color: rgb(221, 221, 221);
+    padding-bottom: 0.4rem;
+}
+
+.comment-replies-container{
+    width: 100%;
+    border-bottom: 1px solid chocolate;
+    margin-left: 20vw;
+}
+
+.comment-reply {
+    display: flex;
+}
+
 .comments-postitem .url{
     width: 100%;
     height: auto;
     padding-left: 1rem;
-    border-bottom: 1px solid chocolate;
+    
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

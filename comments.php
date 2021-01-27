@@ -54,6 +54,7 @@ $_SESSION['user']['updatekey'] = $randomKey;
                 <?php
                 $count++;
                 $commentUserId = $comment['user_id'];
+                $commentId = $comment['id'];
                 $commentAuthor = getPostAuthor($pdo, $commentUserId);
                 ?>
                 <div class="avatar">
@@ -72,9 +73,69 @@ $_SESSION['user']['updatekey'] = $randomKey;
                         <a href="<?= '/comment-update.php?commentid=' . $comment['id'] . '&&postid=' . $postId . '&&updatekey=' . $randomKey; ?>">edit</a>
                         <a href="<?= '/app/posts/comment-delete.php?commentid=' . $comment['id'] . '&&postid=' . $post['id'] . '&&updatekey=' . $randomKey; ?>">delete</a>
                     <?php endif; ?>
+                    <a href=" <?='/comment-reply-form.php?id=' . $commentId ?>">reply to comment</a>
                 </div>
+                        
+
                 <span class="comment-span"></span>
+                <?php $likeCount = getCommentLikes($pdo, $commentId); ?>
+                <?php $likeCheck = commentLikeCheck($pdo, $commentId, $userId); ?>
+                <div class="comment-poster-likes">
+                    <?php if (isset($_SESSION['user'])) : ?>
+                        <?php if (isset($likeCheck)) : ?>
+                            <form action="/app/posts/comment-dislike.php" method="post">
+                                <label for="dislike"></label>
+                                <input type="hidden" name="dislike" id="comment_id" value="<?= $comment['id']; ?>">
+                                <input type="hidden" name="post_id" id="post_id" value="<?= $postId; ?>">
+                                <button type="submit"><img src="/app/images/dislike.png" height="15px" width="15px" alt=""></button>
+                            </form>
+                        <?php elseif (!$likeCheck) : ?>
+                            <form action="/app/posts/comment-like.php" method="post">
+                                <label for="like"></label>
+                                <input type="hidden" name="like" id="comment_id" value="<?= $comment['id'] ?>">
+                                <input type="hidden" name="post_id" id="post_id" value="<?= $postId; ?>">
+                                <button type="submit"><img src="/app/images/likes.png" height=15px width="15px" alt=""></button>
+                            </form>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?= $likeCount['COUNT(*)'] . ' likes ' ?>
+                </div>
+
+
+                
+                        <div class = "comment-replies-container">
+                        <?php
+                        $replyComments = fetchCommentReplies($pdo ,$commentId);
+                           
+                        foreach ($replyComments as $replyComment) {
+                            ?>
+                            <div class = "comment-reply">
+                            <?php
+                            $commentUserId = $replyComment['user_id'];
+                            $commentAuthor = getPostAuthor($pdo, $commentUserId);
+                            ?>
+                            <div class="avatar">
+                                <img src="<?php echo "/app/images/" . $commentAuthor['avatar']; ?>" height="25px" width="25px" alt="">
+                            </div>
+                            <div class="comment-info">
+                                <b><?php echo $commentAuthor['username']; ?></b>
+                                <div class="comment-content">
+                                    <?php echo $replyComment['content']; ?>
+                                </div>
+                            </div>
+                        </div>
+                                    
+
+        
+
+                            <?php
+                        }
+                        ?>
+                        </div>
+                
             <?php endforeach; ?>
+            
+
         </div>
         <div class="add-comment">
             <form action="comments.php?id=<?= $postId; ?>" method="post">
